@@ -124,9 +124,22 @@ html[data-theme='dark'] {
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   background-color: var(--color-bg-deep);
+}
+
+/* ---------- Scroll Snap Section Layout ---------- */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 body {
