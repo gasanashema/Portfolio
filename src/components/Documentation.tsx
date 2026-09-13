@@ -206,7 +206,7 @@ export default function Documentation({ onSelectDoc }: DocumentationProps) {
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
             {LIBRARY_CATEGORIES.map((cat) => (
-              <span key={cat} className="font-mono" style={{ fontSize: '0.6rem', padding: '0.25rem 0.6rem', borderRadius: '4px', background: 'rgba(255, 255, 255, 0.04)', color: 'var(--color-text-secondary)' }}>
+              <span key={cat} className="font-mono" style={{ fontSize: '0.6rem', padding: '0.25rem 0.6rem', borderRadius: 0, background: 'rgba(255, 255, 255, 0.04)', color: 'var(--color-text-secondary)' }}>
                 {cat}
               </span>
             ))}
@@ -233,7 +233,7 @@ export default function Documentation({ onSelectDoc }: DocumentationProps) {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             {SOUNDTRACK_PLAYLISTS.slice(0, 3).map((pl) => (
-              <div key={pl.name} className="glass-panel" style={{ padding: '0.6rem 0.85rem', borderRadius: '4px' }}>
+              <div key={pl.name} className="glass-panel" style={{ padding: '0.6rem 0.85rem', borderRadius: 0 }}>
                 <span className="font-mono" style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--color-accent-secondary)', display: 'block' }}>
                   // {pl.name}
                 </span>
@@ -262,7 +262,7 @@ export default function Documentation({ onSelectDoc }: DocumentationProps) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
             {ARCHIVE_ITEMS.map((item) => (
-              <div key={item.label} className="glass-panel" style={{ padding: '0.6rem', borderRadius: '4px' }}>
+              <div key={item.label} className="glass-panel" style={{ padding: '0.6rem', borderRadius: 0 }}>
                 <span className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 800, color: '#ffffff', display: 'block' }}>
                   {item.label}
                 </span>

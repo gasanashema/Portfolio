@@ -177,7 +177,7 @@ export default function TechMatrix() {
                         fontWeight: 700,
                         letterSpacing: '0.12em',
                         padding: '0.25rem 0.6rem',
-                        borderRadius: '4px',
+                        borderRadius: 0,
                         textTransform: 'uppercase',
                         flexShrink: 0,
                         background:

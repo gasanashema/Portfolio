@@ -113,7 +113,7 @@ export default function DocModal({ article, onClose }: DocModalProps) {
                   justifyContent: 'center',
                   width: '2.25rem',
                   height: '2.25rem',
-                  borderRadius: '50%',
+                  borderRadius: 0,
                   border: '1px solid var(--glass-l1-border)',
                   background: 'rgba(255, 255, 255, 0.04)',
                   color: 'var(--color-text-secondary)',

@@ -347,7 +347,7 @@ export default function CommandPalette({
                 style={{
                   fontSize: '0.6rem',
                   padding: '0.2rem 0.5rem',
-                  borderRadius: '4px',
+                  borderRadius: 0,
                   background: 'rgba(255, 255, 255, 0.06)',
                   color: 'var(--color-text-tertiary)',
                   flexShrink: 0,

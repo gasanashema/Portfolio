@@ -232,7 +232,7 @@ export default function Footer() {
                     style={{
                       width: '0.45rem',
                       height: '0.45rem',
-                      borderRadius: '50%',
+                      borderRadius: 0,
                       background: status.color,
                       boxShadow: `0 0 8px ${status.color}80`,
                     }}

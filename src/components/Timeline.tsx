@@ -222,7 +222,7 @@ export default function Timeline() {
                           style={{
                             width: '0.3rem',
                             height: '0.3rem',
-                            borderRadius: '50%',
+                            borderRadius: 0,
                             background: isCurrent ? 'var(--color-accent-primary)' : 'var(--color-text-muted)',
                           }}
                         />
@@ -274,7 +274,7 @@ export default function Timeline() {
                     {exp.organization}
                   </span>
                 </div>
-                <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--color-text-muted)', background: 'rgba(255, 255, 255, 0.04)', padding: '0.3rem 0.6rem', borderRadius: '4px' }}>
+                <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--color-text-muted)', background: 'rgba(255, 255, 255, 0.04)', padding: '0.3rem 0.6rem', borderRadius: 0 }}>
                   {exp.period}
                 </span>
               </div>
@@ -333,7 +333,7 @@ export default function Timeline() {
               </span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                 {EDUCATION_DATA.areasOfStudy.map((area) => (
-                  <span key={area} className="font-mono" style={{ fontSize: '0.6rem', padding: '0.25rem 0.55rem', borderRadius: '4px', background: 'rgba(255, 255, 255, 0.04)', color: 'var(--color-text-secondary)' }}>
+                  <span key={area} className="font-mono" style={{ fontSize: '0.6rem', padding: '0.25rem 0.55rem', borderRadius: 0, background: 'rgba(255, 255, 255, 0.04)', color: 'var(--color-text-secondary)' }}>
                     {area}
                   </span>
                 ))}

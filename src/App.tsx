@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 
 import Background from './components/Background';
 import Navbar from './components/Navbar';
 import CommandPalette from './components/CommandPalette';
-import Hero from './components/Hero';
-import About from './components/About';
-import NsCodex from './components/NsCodex';
-import Projects from './components/Projects';
-import TechMatrix from './components/TechMatrix';
-import Protocols from './components/Protocols';
-import Documentation from './components/Documentation';
-import NowNode from './components/NowNode';
-import Timeline from './components/Timeline';
-import DigitalNetwork from './components/DigitalNetwork';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
+
+import HomeView from './components/views/HomeView';
+import WorkView from './components/views/WorkView';
+import TechView from './components/views/TechView';
+import JourneyView from './components/views/JourneyView';
+import ContactView from './components/views/ContactView';
 
 import ProjectModal from './components/ProjectModal';
 import DocModal from './components/DocModal';
@@ -23,14 +18,16 @@ import DocModal from './components/DocModal';
 import type { Project } from './data/projects';
 import type { DocArticle } from './data/documentation';
 
+type PageId = 'home' | 'work' | 'tech' | 'journey' | 'contact';
+
 /**
  * NS CODEX – Main Personal Digital System Orchestrator
  *
- * Coordinates the ambient neural constellation background, hardware-accelerated
- * scroll progress bar, floating smoked-glass navigation, interactive command palette,
- * modal inspectors, and the complete sequence of content sections.
+ * Multi-Page Architecture with right-edge fixed navigation,
+ * sub-page views, interactive command palette, and modal inspectors.
  */
 export default function App() {
+  const [activePage, setActivePage] = useState<PageId>('home');
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedDoc, setSelectedDoc] = useState<DocArticle | null>(null);
@@ -42,8 +39,29 @@ export default function App() {
     restDelta: 0.001,
   });
 
+  // Sync hash routing with activePage state
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') as PageId;
+      if (['home', 'work', 'tech', 'journey', 'contact'].includes(hash)) {
+        setActivePage(hash);
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const navigateTo = (pageId: string) => {
+    const validPage = pageId as PageId;
+    setActivePage(validPage);
+    window.location.hash = `#${validPage}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       {/* Ambient Neural Particle Canvas */}
       <Background />
 
@@ -64,15 +82,25 @@ export default function App() {
         }}
       />
 
-      {/* Floating Smoked Glass Header */}
-      <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
+      {/* Right Edge Fixed Icon Header Navigation */}
+      <Navbar
+        activePage={activePage}
+        onNavigate={navigateTo}
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+      />
 
       {/* Global Interactive Command Palette (Ctrl+K / ⌘K) */}
       <CommandPalette
         isOpen={commandPaletteOpen}
         onClose={() => setCommandPaletteOpen(false)}
-        onSelectProject={(project) => setSelectedProject(project)}
-        onSelectDoc={(doc) => setSelectedDoc(doc)}
+        onSelectProject={(project) => {
+          setSelectedProject(project);
+          setCommandPaletteOpen(false);
+        }}
+        onSelectDoc={(doc) => {
+          setSelectedDoc(doc);
+          setCommandPaletteOpen(false);
+        }}
       />
 
       {/* Modals */}
@@ -85,7 +113,7 @@ export default function App() {
         onClose={() => setSelectedDoc(null)}
       />
 
-      {/* Main Semantic Content Flow */}
+      {/* Main Multi-Page Content Area */}
       <main
         className="container"
         style={{
@@ -93,23 +121,45 @@ export default function App() {
           zIndex: 1,
           display: 'flex',
           flexDirection: 'column',
-          gap: 'var(--section-gap)',
-          paddingTop: '6.5rem',
-          paddingBottom: '3.5rem',
+          paddingTop: '2.5rem',
+          paddingBottom: '4rem',
         }}
       >
-        <Hero />
-        <About />
-        <NsCodex />
-        <Projects onSelectProject={(project) => setSelectedProject(project)} />
-        <TechMatrix />
-        <Protocols onSelectProject={(project) => setSelectedProject(project)} />
-        <Documentation onSelectDoc={(doc) => setSelectedDoc(doc)} />
-        <NowNode />
-        <Timeline />
-        <DigitalNetwork />
-        <Contact />
-        <Footer />
+        <AnimatePresence mode="wait">
+          {activePage === 'home' && (
+            <HomeView key="home" onNavigate={navigateTo} />
+          )}
+
+          {activePage === 'work' && (
+            <WorkView
+              key="work"
+              onSelectProject={(project) => setSelectedProject(project)}
+            />
+          )}
+
+          {activePage === 'tech' && (
+            <TechView
+              key="tech"
+              onSelectProject={(project) => setSelectedProject(project)}
+            />
+          )}
+
+          {activePage === 'journey' && (
+            <JourneyView key="journey" />
+          )}
+
+          {activePage === 'contact' && (
+            <ContactView
+              key="contact"
+              onSelectDoc={(doc) => setSelectedDoc(doc)}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Global Footer on every sub-page */}
+        <div style={{ marginTop: 'var(--section-gap)' }}>
+          <Footer />
+        </div>
       </main>
     </div>
   );
