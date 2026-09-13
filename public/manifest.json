@@ -1,0 +1,12 @@
+{
+  "short_name": "Shema Philbert",
+  "name": "Shema Philbert Gasana – Software Engineer",
+  "description": "Official website and software engineering portfolio of Shema Philbert Gasana.",
+  "icons": [],
+  "start_url": "/",
+  "background_color": "#060608",
+  "theme_color": "#060608",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["technology", "software", "portfolio"]
+}

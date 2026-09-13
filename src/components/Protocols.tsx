@@ -1,0 +1,452 @@
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import {
+  Activity,
+  Cpu,
+  Database,
+  Globe,
+  Zap,
+  Layers,
+  Server,
+  ArrowRight,
+  GitBranch,
+  Rocket,
+} from 'lucide-react';
+import { PROTOCOLS, PROTOCOL_CATEGORIES, type Protocol, type ProtocolCategory } from '../data/protocols';
+import { PROJECTS, type Project } from '../data/projects';
+
+interface ProtocolsProps {
+  onSelectProject?: (project: Project) => void;
+}
+
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; style?: React.CSSProperties }>> = {
+  Database,
+  Cpu,
+  Zap,
+  Globe,
+  Layers,
+  Server,
+};
+
+const PIPELINE_STAGES = [
+  { step: '01', title: 'CODE', desc: 'Application Logic' },
+  { step: '02', title: 'GIT', desc: 'Version Control' },
+  { step: '03', title: 'CI/CD', desc: 'Automated Pipelines' },
+  { step: '04', title: 'DOCKER', desc: 'Containers' },
+  { step: '05', title: 'KUBERNETES', desc: 'Orchestration' },
+  { step: '06', title: 'INFRASTRUCTURE', desc: 'Terraform & Ansible' },
+  { step: '07', title: 'CLOUD', desc: 'AWS EC2 & S3' },
+];
+
+function ProtocolCard({
+  item,
+  onSelectProject,
+}: {
+  item: Protocol;
+  onSelectProject?: (project: Project) => void;
+}) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useTransform(mouseY, [-150, 150], [4, -4]);
+  const rotateY = useTransform(mouseX, [-150, 150], [-4, 4]);
+
+  const IconComp = ICON_MAP[item.iconName];
+  const relatedProject = item.relatedProjectId
+    ? PROJECTS.find((p) => p.id === item.relatedProjectId)
+    : null;
+
+  return (
+    <motion.article
+      onMouseMove={(e) => {
+        if (window.innerWidth < 1024) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        mouseX.set(e.clientX - (rect.left + rect.width / 2));
+        mouseY.set(e.clientY - (rect.top + rect.height / 2));
+      }}
+      onMouseLeave={() => {
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
+      className="liquid-glass-card"
+      style={{
+        rotateX,
+        rotateY,
+        perspective: 1000,
+        willChange: 'transform',
+        transformStyle: 'preserve-3d',
+        padding: '2rem',
+        borderRadius: 'var(--border-radius-lg)',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        cursor: 'default',
+      }}
+    >
+      {/* Header */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          marginBottom: '1.5rem',
+        }}
+      >
+        <div
+          style={{
+            padding: '0.75rem',
+            borderRadius: 'var(--border-radius-sm)',
+            background: `${item.iconColor}14`,
+            color: item.iconColor,
+          }}
+        >
+          {IconComp && <IconComp size={22} />}
+        </div>
+        <span
+          className="font-mono"
+          style={{
+            fontSize: '0.6rem',
+            fontWeight: 700,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            color: 'var(--color-text-muted)',
+          }}
+        >
+          {item.id}
+        </span>
+      </div>
+
+      {/* Title */}
+      <h3
+        className="font-display"
+        style={{
+          fontSize: '1.25rem',
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.02em',
+          marginBottom: '0.75rem',
+          color: 'var(--color-text-primary)',
+        }}
+      >
+        {item.title}
+      </h3>
+
+      {/* Description */}
+      <p
+        style={{
+          fontSize: '0.875rem',
+          fontWeight: 300,
+          lineHeight: 1.7,
+          color: 'var(--color-text-secondary)',
+          flex: 1,
+          marginBottom: '1.5rem',
+        }}
+      >
+        {item.description}
+      </p>
+
+      {/* Footer */}
+      <div
+        style={{
+          paddingTop: '1.25rem',
+          borderTop: '1px solid var(--glass-l1-border)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.85rem',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Activity size={12} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+          <p
+            className="font-display"
+            style={{
+              fontSize: '0.625rem',
+              fontWeight: 700,
+              color: 'var(--color-text-tertiary)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
+            {item.purpose}
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+          {item.tags.map((tag) => (
+            <span
+              key={tag}
+              className="font-mono"
+              style={{
+                fontSize: '0.55rem',
+                padding: '0.2rem 0.55rem',
+                borderRadius: 'var(--border-radius-xs)',
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                color: 'var(--color-text-tertiary)',
+                letterSpacing: '0.05em',
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {relatedProject && onSelectProject && (
+          <button
+            onClick={() => onSelectProject(relatedProject)}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--color-accent-primary)',
+              fontFamily: 'var(--font-display)',
+              fontSize: '0.65rem',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              paddingTop: '0.25rem',
+              textAlign: 'left',
+            }}
+          >
+            <span>Linked System: {relatedProject.title}</span>
+            <ArrowRight size={12} />
+          </button>
+        )}
+      </div>
+    </motion.article>
+  );
+}
+
+export default function Protocols({ onSelectProject }: ProtocolsProps) {
+  const [activeFilter, setActiveFilter] = useState<ProtocolCategory>('All');
+
+  const filtered = useMemo(
+    () =>
+      activeFilter === 'All'
+        ? PROTOCOLS
+        : PROTOCOLS.filter((p) => p.category === activeFilter),
+    [activeFilter],
+  );
+
+  return (
+    <section
+      id="protocols"
+      aria-labelledby="protocols-heading"
+      style={{ scrollMarginTop: '6rem' }}
+    >
+      {/* Header Row */}
+      <div
+        className="protocols-header"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem',
+          marginBottom: '3rem',
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="section-label" style={{ marginBottom: '1rem', display: 'flex' }}>
+            07 — DEVOPS / BEYOND THE CODE
+          </span>
+          <h2
+            id="protocols-heading"
+            className="font-display"
+            style={{
+              fontSize: 'clamp(2.75rem, 7vw, 5.5rem)',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              letterSpacing: '-0.03em',
+              lineHeight: 0.95,
+            }}
+          >
+            BEYOND THE <span className="text-gradient-flow">CODE</span>
+          </h2>
+          <p
+            className="font-display"
+            style={{
+              fontSize: 'clamp(1rem, 2vw, 1.35rem)',
+              fontWeight: 300,
+              color: 'var(--color-text-secondary)',
+              maxWidth: '48rem',
+              lineHeight: 1.5,
+              marginTop: '0.75rem',
+            }}
+          >
+            Writing software is only part of the job. I'm increasingly interested in what happens after the code is written — containers, pipelines, orchestration, and infrastructure.
+          </p>
+        </motion.div>
+
+        {/* Filter Pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="liquid-glass-card"
+          style={{
+            display: 'inline-flex',
+            gap: '0.25rem',
+            padding: '0.3rem',
+            borderRadius: 'var(--border-radius-md)',
+            alignSelf: 'flex-start',
+          }}
+        >
+          {PROTOCOL_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              aria-pressed={activeFilter === cat}
+              className="font-display"
+              style={{
+                padding: '0.6rem 1.25rem',
+                borderRadius: 'var(--border-radius-sm)',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '0.625rem',
+                fontWeight: 700,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                transition: 'all var(--transition-fast)',
+                background:
+                  activeFilter === cat
+                    ? 'var(--color-accent-primary)'
+                    : 'transparent',
+                color: activeFilter === cat ? '#fff' : 'var(--color-text-tertiary)',
+                boxShadow:
+                  activeFilter === cat
+                    ? '0 4px 16px rgba(255, 107, 44, 0.3)'
+                    : 'none',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Pipeline Flow Visualization */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="liquid-glass-card"
+        style={{
+          padding: '2rem',
+          borderRadius: 'var(--border-radius-xl)',
+          marginBottom: '2.5rem',
+          border: '1px solid rgba(255, 107, 44, 0.2)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
+          <GitBranch size={16} style={{ color: 'var(--color-accent-primary)' }} />
+          <span className="font-mono" style={{ fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.2em', color: 'var(--color-accent-primary)', textTransform: 'uppercase' }}>
+            # THE INFRASTRUCTURE PIPELINE
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem' }}>
+          {PIPELINE_STAGES.map((stg, i) => (
+            <React.Fragment key={stg.title}>
+              <div
+                className="glass-panel"
+                style={{
+                  padding: '0.75rem 1.25rem',
+                  borderRadius: 'var(--border-radius-md)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.2rem',
+                }}
+              >
+                <span className="font-mono" style={{ fontSize: '0.55rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
+                  {stg.step}
+                </span>
+                <span className="font-display" style={{ fontSize: '0.9rem', fontWeight: 800, color: '#ffffff', letterSpacing: '0.05em' }}>
+                  {stg.title}
+                </span>
+                <span style={{ fontSize: '0.7rem', color: 'var(--color-text-tertiary)' }}>
+                  {stg.desc}
+                </span>
+              </div>
+              {i < PIPELINE_STAGES.length - 1 && (
+                <span style={{ color: 'var(--color-accent-primary)', fontWeight: 700, fontSize: '1.1rem' }}>↓</span>
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* Milestone Callout */}
+        <div
+          style={{
+            marginTop: '1.75rem',
+            paddingTop: '1.25rem',
+            borderTop: '1px solid var(--glass-l1-border)',
+            display: 'flex',
+            alignItems: 'flex-start',
+            gap: '1rem',
+          }}
+        >
+          <Rocket size={20} style={{ color: 'var(--color-accent-secondary)', flexShrink: 0, marginTop: '0.2rem' }} />
+          <div>
+            <h4 className="font-mono" style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--color-accent-secondary)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
+              # A SMALL MILESTONE
+            </h4>
+            <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+              "One of the moments that made this journey feel real was getting my first GitLab CI/CD pipeline running. It was a small pipeline. But it changed how I thought about software. Writing the application was no longer the end. There was another world after 'git push'."
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Cards Grid */}
+      <div
+        className="protocols-grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: '1.25rem',
+        }}
+      >
+        <AnimatePresence mode="popLayout">
+          {filtered.map((item) => (
+            <motion.div
+              layout
+              key={item.id}
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: -10 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <ProtocolCard item={item} onSelectProject={onSelectProject} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      <style>{`
+        @media (min-width: 768px) {
+          .protocols-header {
+            flex-direction: row !important;
+            justify-content: space-between;
+            align-items: flex-end;
+          }
+          .protocols-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (min-width: 1100px) {
+          .protocols-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
