@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plane } from 'lucide-react';
+import { Plane, Moon, Sun } from 'lucide-react';
 
 interface CinematicPreloaderProps {
+  currentTheme?: 'light' | 'dark';
+  onSelectTheme?: (theme: 'light' | 'dark') => void;
   onComplete?: () => void;
 }
 
-export default function CinematicPreloader({ onComplete }: CinematicPreloaderProps) {
-  const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<1 | 2 | 3>(1);
+export default function CinematicPreloader({
+  onSelectTheme,
+  onComplete,
+}: CinematicPreloaderProps) {
+  const [countdown, setCountdown] = useState(5);
+  const [selectedMode, setSelectedMode] = useState<'light' | 'dark' | null>(null);
   const [isUnzipping, setIsUnzipping] = useState(false);
   const [planeProgress, setPlaneProgress] = useState(0); // 0 to 100%
 
@@ -21,34 +26,41 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
     };
   }, []);
 
-  // Rapid loading phase (~0.9s) before unzipping flight begins
+  // 5-second countdown timer for theme selection (auto-defaults to dark mode)
   useEffect(() => {
-    const startTime = Date.now();
-    const loadDuration = 900;
+    if (isUnzipping || selectedMode !== null) return;
 
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      const currentProgress = Math.min(100, Math.floor((elapsed / loadDuration) * 100));
-      setProgress(currentProgress);
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          // Auto-default to dark mode after 5s of inaction
+          handleModeSelect('dark');
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
-      if (currentProgress >= 20 && phase < 2) setPhase(2);
-      if (currentProgress >= 60 && phase < 3) setPhase(3);
+    return () => clearInterval(timer);
+  }, [isUnzipping, selectedMode]);
 
-      if (elapsed >= loadDuration) {
-        clearInterval(interval);
-        setIsUnzipping(true);
-      }
-    }, 20);
-
-    return () => clearInterval(interval);
-  }, [phase]);
+  // Mode Selection Trigger
+  const handleModeSelect = (mode: 'light' | 'dark') => {
+    if (isUnzipping) return;
+    setSelectedMode(mode);
+    if (onSelectTheme) {
+      onSelectTheme(mode);
+    }
+    setIsUnzipping(true);
+  };
 
   // Plane flight animation sequence (1.4 seconds smooth flight across the screen)
   useEffect(() => {
     if (!isUnzipping) return;
 
     const zipStartTime = Date.now();
-    const zipDuration = 1400; // 1.4s smooth flight duration so user can see it clearly
+    const zipDuration = 1400; // 1.4s smooth flight duration
 
     const zipInterval = setInterval(() => {
       const elapsed = Date.now() - zipStartTime;
@@ -158,7 +170,7 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
               <motion.h1
                 className="font-display"
                 initial={{ opacity: 0, y: 15 }}
-                animate={phase >= 2 ? { opacity: 1, y: 0 } : {}}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
                 style={{
                   fontSize: 'clamp(2.25rem, 5.5vw, 4.75rem)',
@@ -198,18 +210,21 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
               borderTop: '2px dashed var(--color-accent-primary)',
             }}
           >
-            {/* Bottom Subtitles */}
+            {/* Bottom Subtitles & Interactive Theme Prompt */}
             <div
               style={{
                 textAlign: 'center',
                 alignSelf: 'center',
                 marginTop: '-1.25rem',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
             >
               <motion.div
                 className="font-display"
                 initial={{ opacity: 0, y: 15 }}
-                animate={phase >= 2 ? { opacity: 1, y: 0 } : {}}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
                 style={{
                   fontSize: 'clamp(1rem, 2.2vw, 1.75rem)',
@@ -217,26 +232,106 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                   letterSpacing: '0.22em',
                   textTransform: 'uppercase',
                   color: 'var(--color-accent-primary)',
-                  marginBottom: '0.5rem',
+                  marginBottom: '0.25rem',
                 }}
               >
                 SOFTWARE ENGINEER
               </motion.div>
 
-              <motion.div
+              <div
                 className="font-mono"
-                initial={{ opacity: 0 }}
-                animate={phase >= 3 ? { opacity: 1 } : {}}
-                transition={{ duration: 0.3 }}
                 style={{
-                  fontSize: 'clamp(0.65rem, 1.2vw, 0.85rem)',
-                  letterSpacing: '0.28em',
+                  fontSize: 'clamp(0.6rem, 1vw, 0.75rem)',
+                  letterSpacing: '0.25em',
                   color: 'var(--color-text-tertiary)',
                   textTransform: 'uppercase',
+                  marginBottom: '1.25rem',
                 }}
               >
                 SOFTWARE · SYSTEMS · DEVOPS
-              </motion.div>
+              </div>
+
+              {/* THEME SELECTION BUTTONS */}
+              {!isUnzipping && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    gap: '0.75rem',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    padding: '1rem 1.75rem',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(8px)',
+                  }}
+                >
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: '0.625rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.2em',
+                      color: 'var(--color-text-primary)',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    SELECT ENVIRONMENT MODE
+                  </span>
+
+                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    <button
+                      type="button"
+                      onClick={() => handleModeSelect('dark')}
+                      className="btn-primary"
+                      style={{
+                        padding: '0.6rem 1.25rem',
+                        fontSize: '0.7rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        borderRadius: 0,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <Moon size={14} />
+                      <span>DARK MODE</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleModeSelect('light')}
+                      className="btn-glass"
+                      style={{
+                        padding: '0.6rem 1.25rem',
+                        fontSize: '0.7rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        borderRadius: 0,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <Sun size={14} />
+                      <span>WHITE MODE</span>
+                    </button>
+                  </div>
+
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: '0.58rem',
+                      letterSpacing: '0.15em',
+                      color: 'var(--color-text-muted)',
+                      marginTop: '0.2rem',
+                    }}
+                  >
+                    AUTO-OPENING IN DARK MODE IN {countdown}s...
+                  </span>
+                </motion.div>
+              )}
             </div>
 
             {/* Bottom Footer Progress Counter */}
@@ -258,7 +353,7 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                   textTransform: 'uppercase',
                 }}
               >
-                {isUnzipping ? 'UNZIPPING_PAGE...' : 'INITIALIZING_SYSTEM...'}
+                {isUnzipping ? 'UNZIPPING_PAGE...' : 'WAITING_FOR_MODE_SELECTION...'}
               </span>
 
               <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
@@ -272,7 +367,7 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                     lineHeight: 0.9,
                   }}
                 >
-                  {String(isUnzipping ? 100 : progress).padStart(2, '0')}
+                  {String(isUnzipping ? 100 : countdown * 20).padStart(2, '0')}
                 </span>
                 <span
                   className="font-mono"

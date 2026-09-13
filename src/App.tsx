@@ -80,7 +80,11 @@ export default function App() {
     <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       {/* Standalone Cinematic Preloader Overlay */}
       {isLoading && (
-        <CinematicPreloader onComplete={() => setIsLoading(false)} />
+        <CinematicPreloader
+          currentTheme={theme}
+          onSelectTheme={(selectedTheme) => setTheme(selectedTheme)}
+          onComplete={() => setIsLoading(false)}
+        />
       )}
 
       {/* Ambient Neural Particle Canvas */}
