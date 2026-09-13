@@ -74,8 +74,8 @@ function ProtocolCard({
         perspective: 1000,
         willChange: 'transform',
         transformStyle: 'preserve-3d',
-        padding: '2rem',
-        borderRadius: 'var(--border-radius-lg)',
+        padding: '1.15rem',
+        borderRadius: 0,
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
@@ -339,9 +339,9 @@ export default function Protocols({ onSelectProject }: ProtocolsProps) {
         transition={{ duration: 0.6 }}
         className="liquid-glass-card"
         style={{
-          padding: '2rem',
-          borderRadius: 'var(--border-radius-xl)',
-          marginBottom: '2.5rem',
+          padding: '1.15rem 1.5rem',
+          borderRadius: 0,
+          marginBottom: '1.5rem',
           border: '1px solid rgba(255, 107, 44, 0.2)',
         }}
       >

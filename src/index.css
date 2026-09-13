@@ -55,7 +55,7 @@
   --glass-l3-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
 
   /* Spacing & Layout */
-  --section-gap: 8rem;
+  --section-gap: 2.5rem;
   --container-max: 1320px;
   --nav-height: 4.25rem;
   --border-radius-xs: 0px;

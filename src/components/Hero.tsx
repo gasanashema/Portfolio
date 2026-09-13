@@ -73,12 +73,12 @@ export default function Hero() {
       onMouseLeave={handleMouseLeave}
       style={{
         position: 'relative',
-        minHeight: '88vh',
+        minHeight: 'auto',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        paddingTop: '4rem',
-        paddingBottom: '2rem',
+        paddingTop: '1.5rem',
+        paddingBottom: '1rem',
       }}
     >
       <motion.div style={{ opacity, scale, y, x: dx }}>

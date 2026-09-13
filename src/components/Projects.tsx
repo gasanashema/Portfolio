@@ -4,6 +4,7 @@ import {
   ExternalLink,
   Github,
   ArrowRight,
+  Code2,
 } from 'lucide-react';
 import { PROJECTS, type Project } from '../data/projects';
 
@@ -22,61 +23,43 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
     });
   }, [selectedCategory]);
 
-  const featuredProjects = useMemo(() => PROJECTS.filter((p) => p.featured), []);
-  const heroProject = featuredProjects[0] || PROJECTS[0];
-  const secondaryFeatured = featuredProjects.slice(1);
-
   return (
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      style={{ scrollMarginTop: '6rem' }}
+      style={{ scrollMarginTop: '4rem' }}
     >
-      {/* Section Header */}
+      {/* Compact Section Header */}
       <div
-        className="projects-header"
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '1.5rem',
-          marginBottom: '3.5rem',
+          gap: '1rem',
+          marginBottom: '1.5rem',
         }}
       >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <span className="section-label" style={{ marginBottom: '1rem', display: 'flex' }}>
-            04 — SELECTED WORK
+          <span className="section-label" style={{ marginBottom: '0.5rem', display: 'flex' }}>
+            04 — SELECTED WORK ({filteredProjects.length} PROJECTS)
           </span>
           <h2
             id="projects-heading"
             className="font-display"
             style={{
-              fontSize: 'clamp(2.75rem, 7vw, 5.5rem)',
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
               fontWeight: 900,
               textTransform: 'uppercase',
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.02em',
               lineHeight: 0.95,
             }}
           >
             SELECTED <span className="text-gradient-flow">WORK</span>
           </h2>
-          <p
-            className="font-display"
-            style={{
-              fontSize: 'clamp(1rem, 2vw, 1.35rem)',
-              fontWeight: 300,
-              color: 'var(--color-text-secondary)',
-              maxWidth: '48rem',
-              lineHeight: 1.5,
-              marginTop: '0.75rem',
-            }}
-          >
-            A collection of products, systems, and ideas I've built or explored. I care about the problem, the architecture, the decisions behind implementation, and what the software could become.
-          </p>
         </motion.div>
 
         {/* Filter Pills */}
@@ -84,14 +67,14 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={{ duration: 0.4 }}
           className="liquid-glass-card"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '0.25rem',
-            padding: '0.3rem',
-            borderRadius: 'var(--border-radius-md)',
+            gap: '0.2rem',
+            padding: '0.25rem',
+            borderRadius: 0,
             alignSelf: 'flex-start',
           }}
         >
@@ -101,13 +84,13 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
               onClick={() => setSelectedCategory(cat)}
               className="font-display"
               style={{
-                padding: '0.5rem 1rem',
-                borderRadius: 'var(--border-radius-sm)',
+                padding: '0.35rem 0.75rem',
+                borderRadius: 0,
                 border: 'none',
                 cursor: 'pointer',
-                fontSize: '0.625rem',
+                fontSize: '0.6rem',
                 fontWeight: 700,
-                letterSpacing: '0.15em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
                 transition: 'all var(--transition-fast)',
                 background:
@@ -115,10 +98,6 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
                     ? 'var(--color-accent-primary)'
                     : 'transparent',
                 color: selectedCategory === cat ? '#fff' : 'var(--color-text-tertiary)',
-                boxShadow:
-                  selectedCategory === cat
-                    ? '0 4px 16px rgba(255, 107, 44, 0.3)'
-                    : 'none',
               }}
             >
               {cat}
@@ -127,199 +106,143 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
         </motion.div>
       </div>
 
-      {/* Featured Primary Hero Card */}
-      {heroProject && selectedCategory === 'All' && (
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="liquid-glass-card"
-          style={{
-            borderRadius: 'var(--border-radius-xl)',
-            padding: 'clamp(2rem, 5vw, 3.5rem)',
-            marginBottom: '2.5rem',
-            position: 'relative',
-            border: '1px solid rgba(255, 107, 44, 0.25)',
-          }}
-        >
-          {/* Ambient Corner Flare */}
-          <div
+      {/* Compact Multi-Column Project Grid */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: '1rem',
+        }}
+      >
+        {filteredProjects.map((project, i) => (
+          <motion.article
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.04 }}
+            className="liquid-glass-card"
             style={{
-              position: 'absolute',
-              top: 0,
-              right: 0,
-              width: '45%',
-              height: '45%',
-              background: 'radial-gradient(circle at 100% 0%, rgba(255, 107, 44, 0.08) 0%, transparent 70%)',
-              pointerEvents: 'none',
-            }}
-          />
-
-          <div
-            style={{
+              padding: '1.15rem',
+              borderRadius: 0,
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem',
-              position: 'relative',
-              zIndex: 1,
+              justifyContent: 'space-between',
+              height: '100%',
+              minHeight: '13.5rem',
+              border: project.featured
+                ? '1px solid rgba(255, 107, 44, 0.35)'
+                : '1px solid rgba(255, 255, 255, 0.08)',
             }}
           >
-            {/* Top Badge Strip */}
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: '1rem',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div>
+              {/* Header Badge */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '0.65rem',
+                }}
+              >
                 <span
                   className="font-mono"
                   style={{
-                    fontSize: '0.7rem',
+                    fontSize: '0.6rem',
                     fontWeight: 800,
-                    letterSpacing: '0.2em',
                     color: 'var(--color-accent-primary)',
+                    letterSpacing: '0.12em',
                   }}
                 >
-                  // {heroProject.code}
+                  //{project.code}
                 </span>
-                <span className="system-badge">{heroProject.status}</span>
-                <span className="system-badge">{heroProject.category}</span>
+                <span
+                  className="font-mono"
+                  style={{
+                    fontSize: '0.5rem',
+                    fontWeight: 700,
+                    padding: '0.15rem 0.45rem',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    color: 'var(--color-text-tertiary)',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  {project.category}
+                </span>
               </div>
-              <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--color-text-muted)' }}>
-                YEAR: {heroProject.year}
-              </span>
-            </div>
 
-            {/* Title & Tagline */}
-            <div>
+              {/* Title & Tagline */}
               <h3
                 className="font-display"
                 style={{
-                  fontSize: 'clamp(2rem, 5vw, 3.25rem)',
+                  fontSize: '1.1rem',
                   fontWeight: 900,
-                  letterSpacing: '-0.02em',
                   textTransform: 'uppercase',
-                  marginBottom: '0.5rem',
-                  lineHeight: 1.05,
+                  color: '#ffffff',
+                  marginBottom: '0.25rem',
+                  lineHeight: 1.15,
                 }}
               >
-                {heroProject.title}
+                {project.title}
               </h3>
+
               <p
                 className="font-display"
                 style={{
-                  fontSize: '1.15rem',
-                  fontWeight: 400,
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
                   color: 'var(--color-accent-secondary)',
+                  marginBottom: '0.5rem',
+                  lineHeight: 1.3,
                 }}
               >
-                {heroProject.tagline}
+                {project.tagline}
+              </p>
+
+              <p
+                style={{
+                  fontSize: '0.78rem',
+                  color: 'var(--color-text-secondary)',
+                  lineHeight: 1.45,
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                {project.description}
               </p>
             </div>
 
-            {/* Description */}
-            <p
-              style={{
-                fontSize: '1rem',
-                color: 'var(--color-text-secondary)',
-                lineHeight: 1.75,
-                maxWidth: '52rem',
-              }}
-            >
-              {heroProject.description}
-            </p>
-
-            {/* Problem / Solution Snapshot */}
+            {/* Bottom Tech Pills & Action */}
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr',
-                gap: '1.25rem',
-              }}
-              className="hero-project-specs-grid"
-            >
-              <div
-                className="glass-panel"
-                style={{
-                  padding: '1.25rem',
-                  borderRadius: 'var(--border-radius-md)',
-                }}
-              >
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.6rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.2em',
-                    color: 'var(--color-accent-tertiary)',
-                    textTransform: 'uppercase',
-                    display: 'block',
-                    marginBottom: '0.4rem',
-                  }}
-                >
-                  // Challenge & Purpose
-                </span>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
-                  {heroProject.problem}
-                </p>
-              </div>
-
-              <div
-                className="glass-panel"
-                style={{
-                  padding: '1.25rem',
-                  borderRadius: 'var(--border-radius-md)',
-                }}
-              >
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.6rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.2em',
-                    color: 'var(--color-accent-primary)',
-                    textTransform: 'uppercase',
-                    display: 'block',
-                    marginBottom: '0.4rem',
-                  }}
-                >
-                  // Architecture & Solution
-                </span>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.55 }}>
-                  {heroProject.solution}
-                </p>
-              </div>
-            </div>
-
-            {/* Tech Stack Pills + Action Buttons */}
-            <div
-              style={{
+                paddingTop: '0.65rem',
+                borderTop: '1px solid rgba(255, 255, 255, 0.06)',
                 display: 'flex',
-                flexWrap: 'wrap',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                gap: '1.5rem',
-                paddingTop: '1.25rem',
-                borderTop: '1px solid var(--glass-l1-border)',
+                gap: '0.5rem',
               }}
             >
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                {heroProject.techStack.map((tech) => (
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.25rem',
+                  maxWidth: '70%',
+                }}
+              >
+                {project.techStack.slice(0, 3).map((tech) => (
                   <span
                     key={tech}
                     className="font-mono"
                     style={{
-                      fontSize: '0.6rem',
-                      padding: '0.3rem 0.7rem',
-                      borderRadius: 'var(--border-radius-xs)',
+                      fontSize: '0.52rem',
+                      padding: '0.15rem 0.4rem',
                       background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.06)',
-                      color: 'var(--color-text-secondary)',
+                      color: 'var(--color-text-tertiary)',
                     }}
                   >
                     {tech}
@@ -327,183 +250,22 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
                 ))}
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <button
-                  onClick={() => onSelectProject(heroProject)}
-                  className="btn-primary"
-                  style={{ padding: '0.75rem 1.75rem', fontSize: '0.7rem' }}
-                >
-                  <span>Inspect Architecture</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Secondary Projects Grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: '1.5rem',
-        }}
-        className="projects-subgrid"
-      >
-        {(selectedCategory === 'All' ? secondaryFeatured : filteredProjects).map((project, i) => (
-          <motion.article
-            key={project.id}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="liquid-glass-card group"
-            style={{
-              padding: '2rem',
-              borderRadius: 'var(--border-radius-lg)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '100%',
-            }}
-          >
-            <div>
-              {/* Header */}
-              <div
+              <button
+                onClick={() => onSelectProject(project)}
+                className="btn-primary"
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'flex-start',
-                  marginBottom: '1.25rem',
+                  padding: '0.35rem 0.75rem',
+                  fontSize: '0.6rem',
+                  borderRadius: 0,
+                  flexShrink: 0,
                 }}
               >
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.65rem',
-                    fontWeight: 700,
-                    color: 'var(--color-accent-primary)',
-                    letterSpacing: '0.15em',
-                  }}
-                >
-                  {project.code}
-                </span>
-                <div style={{ display: 'flex', gap: '0.4rem' }}>
-                  <span className="system-badge">{project.status}</span>
-                  <span className="system-badge">{project.category}</span>
-                </div>
-              </div>
-
-              {/* Title & Tagline */}
-              <h3
-                className="font-display"
-                style={{
-                  fontSize: '1.35rem',
-                  fontWeight: 900,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.01em',
-                  marginBottom: '0.4rem',
-                  color: '#ffffff',
-                }}
-              >
-                {project.title}
-              </h3>
-              <p
-                style={{
-                  fontSize: '0.85rem',
-                  color: 'var(--color-accent-secondary)',
-                  marginBottom: '1rem',
-                  fontWeight: 400,
-                }}
-              >
-                {project.tagline}
-              </p>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--color-text-secondary)',
-                  lineHeight: 1.65,
-                  marginBottom: '1.5rem',
-                }}
-              >
-                {project.description}
-              </p>
-            </div>
-
-            {/* Footer: Tech stack + Inspect link */}
-            <div>
-              <div
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.35rem',
-                  marginBottom: '1.25rem',
-                  paddingTop: '1rem',
-                  borderTop: '1px solid var(--glass-l1-border)',
-                }}
-              >
-                {project.techStack.slice(0, 4).map((t) => (
-                  <span
-                    key={t}
-                    className="font-mono"
-                    style={{
-                      fontSize: '0.55rem',
-                      padding: '0.2rem 0.5rem',
-                      borderRadius: '4px',
-                      background: 'rgba(255, 255, 255, 0.03)',
-                      color: 'var(--color-text-tertiary)',
-                    }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <button
-                  onClick={() => onSelectProject(project)}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    color: 'var(--color-accent-primary)',
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '0.7rem',
-                    fontWeight: 800,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    padding: 0,
-                  }}
-                >
-                  <span>Details & Specs</span>
-                  <ArrowRight size={14} />
-                </button>
-              </div>
+                <span>INSPECT</span>
+              </button>
             </div>
           </motion.article>
         ))}
       </div>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .projects-header {
-            flex-direction: row !important;
-            justify-content: space-between;
-            align-items: flex-end;
-          }
-          .projects-subgrid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          .hero-project-specs-grid {
-            grid-template-columns: 1fr 1fr !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

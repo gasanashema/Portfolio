@@ -4,12 +4,12 @@ import { Code2, Eye, Server, Database, Layers, Cpu, Sparkles, Compass } from 'lu
 import { TECH_GROUPS } from '../data/technologies';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  Code2: <Code2 size={20} style={{ color: 'var(--color-accent-primary)' }} />,
-  Eye: <Eye size={20} style={{ color: 'var(--color-accent-secondary)' }} />,
-  Server: <Server size={20} style={{ color: 'var(--color-accent-tertiary)' }} />,
-  Database: <Database size={20} style={{ color: '#4ade80' }} />,
-  Layers: <Layers size={20} style={{ color: '#38bdf8' }} />,
-  Cpu: <Cpu size={20} style={{ color: '#facc15' }} />,
+  Code2: <Code2 size={16} style={{ color: 'var(--color-accent-primary)' }} />,
+  Eye: <Eye size={16} style={{ color: 'var(--color-accent-secondary)' }} />,
+  Server: <Server size={16} style={{ color: 'var(--color-accent-tertiary)' }} />,
+  Database: <Database size={16} style={{ color: '#4ade80' }} />,
+  Layers: <Layers size={16} style={{ color: '#38bdf8' }} />,
+  Cpu: <Cpu size={16} style={{ color: '#facc15' }} />,
 };
 
 export default function TechMatrix() {
@@ -17,29 +17,29 @@ export default function TechMatrix() {
     <section
       id="capabilities"
       aria-labelledby="techmatrix-heading"
-      style={{ scrollMarginTop: '6rem' }}
+      style={{ scrollMarginTop: '4rem' }}
     >
-      {/* Section Header */}
-      <div style={{ marginBottom: '3.5rem' }}>
+      {/* Compact Section Header */}
+      <div style={{ marginBottom: '1.5rem' }}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <span className="section-label" style={{ marginBottom: '1rem', display: 'flex' }}>
-            03 — TECHNOLOGIES
+          <span className="section-label" style={{ marginBottom: '0.5rem', display: 'flex' }}>
+            03 — TECHNOLOGIES & TOOLS
           </span>
           <h2
             id="techmatrix-heading"
             className="font-display"
             style={{
-              fontSize: 'clamp(2.75rem, 7vw, 5.5rem)',
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
               fontWeight: 900,
               textTransform: 'uppercase',
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.02em',
               lineHeight: 0.95,
-              marginBottom: '1rem',
+              marginBottom: '0.5rem',
             }}
           >
             THE TOOLS I <span className="text-gradient-flow">SPEAK</span>
@@ -47,38 +47,37 @@ export default function TechMatrix() {
           <p
             className="font-display"
             style={{
-              fontSize: 'clamp(1rem, 2vw, 1.35rem)',
+              fontSize: '0.9rem',
               fontWeight: 300,
               color: 'var(--color-text-secondary)',
-              maxWidth: '46rem',
-              lineHeight: 1.5,
+              maxWidth: '42rem',
+              lineHeight: 1.4,
             }}
           >
-            A practical catalog of languages, frameworks, backend architectures, databases, DevOps tooling, and platforms I work with.
+            A high-density matrix of programming languages, frameworks, backend architectures, databases, DevOps tools, and platforms.
           </p>
         </motion.div>
       </div>
 
-      {/* Grid of Tech Groups */}
+      {/* Compact Grid of Tech Groups */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: '1.5rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '1rem',
         }}
-        className="tech-matrix-grid"
       >
         {TECH_GROUPS.map((group, i) => (
           <motion.div
             key={group.title}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
             className="liquid-glass-card"
             style={{
-              padding: '2rem',
-              borderRadius: 'var(--border-radius-lg)',
+              padding: '1rem 1.15rem',
+              borderRadius: 0,
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -90,46 +89,48 @@ export default function TechMatrix() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '1rem',
-                  marginBottom: '1rem',
+                  gap: '0.65rem',
+                  marginBottom: '0.75rem',
+                  paddingBottom: '0.5rem',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                 }}
               >
                 <div
                   style={{
-                    padding: '0.65rem',
-                    borderRadius: 'var(--border-radius-sm)',
+                    padding: '0.4rem',
+                    borderRadius: 0,
                     background: 'rgba(255, 255, 255, 0.04)',
                     flexShrink: 0,
                   }}
                 >
-                  {ICON_MAP[group.iconName] || <Sparkles size={20} />}
+                  {ICON_MAP[group.iconName] || <Sparkles size={16} />}
                 </div>
                 <div>
                   <h3
                     className="font-display"
                     style={{
-                      fontSize: '1.15rem',
+                      fontSize: '0.95rem',
                       fontWeight: 800,
                       textTransform: 'uppercase',
                       color: '#ffffff',
-                      letterSpacing: '0.02em',
+                      letterSpacing: '0.04em',
+                      lineHeight: 1.1,
                     }}
                   >
                     {group.title}
                   </h3>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)' }}>
+                  <span className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--color-text-tertiary)' }}>
                     {group.description}
-                  </p>
+                  </span>
                 </div>
               </div>
 
-              {/* Items List */}
+              {/* High-Density Item Chips Grid */}
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: '1fr',
-                  gap: '0.75rem',
-                  marginTop: '1.25rem',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(135px, 1fr))',
+                  gap: '0.45rem',
                 }}
               >
                 {group.items.map((item) => (
@@ -137,69 +138,71 @@ export default function TechMatrix() {
                     key={item.name}
                     className="glass-panel"
                     style={{
-                      padding: '0.75rem 1rem',
-                      borderRadius: 'var(--border-radius-sm)',
+                      padding: '0.45rem 0.65rem',
+                      borderRadius: 0,
                       display: 'flex',
-                      alignItems: 'center',
+                      flexDirection: 'column',
                       justifyContent: 'space-between',
-                      gap: '1rem',
+                      minHeight: '3.1rem',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
                     }}
                   >
-                    <div style={{ minWidth: 0 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.25rem' }}>
                       <span
                         className="font-display"
                         style={{
-                          fontSize: '0.88rem',
-                          fontWeight: 700,
-                          color: 'var(--color-text-primary)',
-                          display: 'block',
+                          fontSize: '0.78rem',
+                          fontWeight: 800,
+                          color: '#ffffff',
+                          lineHeight: 1.1,
                         }}
                       >
                         {item.name}
                       </span>
-                      {item.note && (
-                        <span
-                          style={{
-                            fontSize: '0.73rem',
-                            color: 'var(--color-text-tertiary)',
-                            display: 'block',
-                          }}
-                        >
-                          {item.note}
-                        </span>
-                      )}
+                      <span
+                        className="font-mono"
+                        style={{
+                          fontSize: '0.45rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.08em',
+                          padding: '0.1rem 0.35rem',
+                          borderRadius: 0,
+                          textTransform: 'uppercase',
+                          background:
+                            item.status === 'REGULAR USE'
+                              ? 'rgba(255, 107, 44, 0.2)'
+                              : item.status === 'WORKED WITH'
+                              ? 'rgba(56, 189, 248, 0.15)'
+                              : 'rgba(255, 255, 255, 0.05)',
+                          color:
+                            item.status === 'REGULAR USE'
+                              ? 'var(--color-accent-primary)'
+                              : item.status === 'WORKED WITH'
+                              ? '#38bdf8'
+                              : 'var(--color-text-tertiary)',
+                          flexShrink: 0,
+                        }}
+                      >
+                        {item.status === 'REGULAR USE' ? 'CORE' : item.status === 'WORKED WITH' ? 'USED' : 'EXP'}
+                      </span>
                     </div>
 
-                    <span
-                      className="font-mono"
-                      style={{
-                        fontSize: '0.55rem',
-                        fontWeight: 700,
-                        letterSpacing: '0.12em',
-                        padding: '0.25rem 0.6rem',
-                        borderRadius: 0,
-                        textTransform: 'uppercase',
-                        flexShrink: 0,
-                        background:
-                          item.status === 'REGULAR USE'
-                            ? 'rgba(255, 107, 44, 0.15)'
-                            : item.status === 'WORKED WITH'
-                            ? 'rgba(56, 189, 248, 0.12)'
-                            : 'rgba(255, 255, 255, 0.05)',
-                        color:
-                          item.status === 'REGULAR USE'
-                            ? 'var(--color-accent-primary)'
-                            : item.status === 'WORKED WITH'
-                            ? '#38bdf8'
-                            : 'var(--color-text-tertiary)',
-                        border:
-                          item.status === 'REGULAR USE'
-                            ? '1px solid rgba(255, 107, 44, 0.3)'
-                            : '1px solid rgba(255, 255, 255, 0.06)',
-                      }}
-                    >
-                      {item.status}
-                    </span>
+                    {item.note && (
+                      <span
+                        className="font-mono"
+                        style={{
+                          fontSize: '0.58rem',
+                          color: 'var(--color-text-tertiary)',
+                          lineHeight: 1.1,
+                          marginTop: '0.2rem',
+                          whiteSpace: 'nowrap',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {item.note}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
@@ -210,64 +213,43 @@ export default function TechMatrix() {
 
       {/* How I View My Stack Callout */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.15 }}
         className="liquid-glass-card"
         style={{
-          marginTop: '2.5rem',
-          padding: '2rem 2.5rem',
-          borderRadius: 'var(--border-radius-xl)',
+          marginTop: '1.5rem',
+          padding: '1.15rem 1.5rem',
+          borderRadius: 0,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-          <Compass size={20} style={{ color: 'var(--color-accent-primary)' }} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.4rem' }}>
+          <Compass size={16} style={{ color: 'var(--color-accent-primary)' }} />
           <h3
             className="font-mono"
             style={{
-              fontSize: '0.75rem',
+              fontSize: '0.675rem',
               fontWeight: 800,
-              letterSpacing: '0.2em',
+              letterSpacing: '0.18em',
               color: 'var(--color-accent-primary)',
               textTransform: 'uppercase',
             }}
           >
-            # HOW I VIEW MY STACK
+            # PHILOSOPHY ON TECH STACK
           </h3>
         </div>
         <p
           className="font-display"
           style={{
-            fontSize: '1.05rem',
+            fontSize: '0.85rem',
             color: 'var(--color-text-secondary)',
-            lineHeight: 1.7,
-            maxWidth: '52rem',
+            lineHeight: 1.5,
           }}
         >
-          "I don't treat every technology as a badge. Some are tools I currently use regularly. Some are technologies I've worked with. Others are areas I'm actively exploring.
-          <br />
-          <strong style={{ color: 'var(--color-text-primary)' }}>
-            The goal isn't to collect technologies. The goal is to understand when and why to use them.
-          </strong>"
+          "The goal isn't to accumulate technologies like badges. The goal is to master engineering principles so you select the right tool, build robust software, and deliver real value."
         </p>
       </motion.div>
-
-      <style>{`
-        .tech-matrix-grid {
-          grid-template-columns: 1fr;
-        }
-        @media (min-width: 900px) {
-          .tech-matrix-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (min-width: 1200px) {
-          .tech-matrix-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-      `}</style>
     </section>
   );
 }

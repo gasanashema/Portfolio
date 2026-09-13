@@ -110,8 +110,8 @@ export default function Timeline() {
                 }}
                 className="liquid-glass-card"
                 style={{
-                  padding: '1.75rem',
-                  borderRadius: 'var(--border-radius-lg)',
+                  padding: '1.15rem',
+                  borderRadius: 0,
                   border: isCurrent
                     ? '1px solid rgba(255, 107, 44, 0.35)'
                     : isFuture
@@ -165,8 +165,8 @@ export default function Timeline() {
 
                     <div
                       style={{
-                        padding: '0.6rem',
-                        borderRadius: 'var(--border-radius-sm)',
+                        padding: '1.15rem',
+                        borderRadius: 0,
                         background: 'rgba(255, 255, 255, 0.04)',
                         color: isCurrent
                           ? 'var(--color-accent-primary)'
@@ -263,7 +263,7 @@ export default function Timeline() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="liquid-glass-card"
-              style={{ padding: '1.75rem', borderRadius: 'var(--border-radius-lg)' }}
+              style={{ padding: '1.15rem', borderRadius: 0 }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
                 <div>
