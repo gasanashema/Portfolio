@@ -233,15 +233,6 @@ export default function About() {
 
             <div>
               <span className="font-mono" style={{ fontSize: '0.58rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block', marginBottom: '0.15rem' }}>
-                EDUCATION
-              </span>
-              <span className="font-display" style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
-                AUCA Software Eng.
-              </span>
-            </div>
-
-            <div>
-              <span className="font-mono" style={{ fontSize: '0.58rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block', marginBottom: '0.15rem' }}>
                 PROJECTS BUILT
               </span>
               <span className="font-display" style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--color-accent-primary)' }}>
