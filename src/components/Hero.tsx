@@ -179,63 +179,48 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* Tagline & Core Bio */}
+        {/* Punchy Minimal Tagline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.75 }}
+          transition={{ duration: 0.6, delay: 0.75 }}
           className="font-display"
           style={{
-            fontSize: 'clamp(1.15rem, 2.2vw, 1.85rem)',
-            fontWeight: 300,
+            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            fontWeight: 400,
             color: 'var(--color-text-secondary)',
-            maxWidth: '56rem',
-            lineHeight: 1.38,
-            marginBottom: '2.5rem',
+            maxWidth: '48rem',
+            lineHeight: 1.35,
+            marginBottom: '1.5rem',
           }}
         >
-          I build software, explore systems, and turn ideas into working products.
-          <br />
-          <span
-            style={{
-              color: 'var(--color-accent-primary)',
-              fontWeight: 600,
-              fontSize: '1rem',
-              fontFamily: 'var(--font-mono)',
-              letterSpacing: '0.08em',
-              display: 'inline-block',
-              marginTop: '0.75rem',
-            }}
-          >
-            {IDENTITY.tagline}
-          </span>
+          Building software, backend systems, and automated infrastructure pipelines.
         </motion.p>
 
-        {/* CTAs + Social Buttons */}
+        {/* Action CTAs & Social Icons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.95 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
           style={{
             display: 'flex',
             flexWrap: 'wrap',
             alignItems: 'center',
-            gap: '1.25rem',
+            gap: '0.85rem',
           }}
         >
-          {/* Primary Action */}
-          <a href="#projects" className="btn-primary">
-            <span>[ Explore My Work ]</span>
+          <a href="#projects" className="btn-primary" style={{ borderRadius: 0, padding: '0.65rem 1.35rem', fontSize: '0.7rem' }}>
+            <span>EXPLORE WORK</span>
           </a>
 
-          {/* Secondary Action */}
           <a
             href={IDENTITY.github}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-glass"
+            style={{ borderRadius: 0, padding: '0.65rem 1.35rem', fontSize: '0.7rem' }}
           >
-            <span>[ Download CV ]</span>
+            <span>DOWNLOAD CV</span>
           </a>
 
           {/* Quick Social Buttons */}
