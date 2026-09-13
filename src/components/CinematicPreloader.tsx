@@ -21,10 +21,10 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
     };
   }, []);
 
-  // Fast-paced loading timeline (~1.2s rapid build + 0.6s plane zip reveal = 1.8s total)
+  // Rapid loading phase (~0.9s) before unzipping flight begins
   useEffect(() => {
     const startTime = Date.now();
-    const loadDuration = 1100; // rapid loading phase
+    const loadDuration = 900;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -43,12 +43,12 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
     return () => clearInterval(interval);
   }, [phase]);
 
-  // Plane flying animation sequence when unzipping starts
+  // Plane flight animation sequence (1.4 seconds smooth flight across the screen)
   useEffect(() => {
     if (!isUnzipping) return;
 
     const zipStartTime = Date.now();
-    const zipDuration = 650; // ms plane flight duration
+    const zipDuration = 1400; // 1.4s smooth flight duration so user can see it clearly
 
     const zipInterval = setInterval(() => {
       const elapsed = Date.now() - zipStartTime;
@@ -78,30 +78,30 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
             userSelect: 'none',
           }}
         >
-          {/* TOP PANEL (UNZIPS UPWARDS BEHIND PLANE) */}
+          {/* TOP PANEL (UNZIPS UPWARDS BEHIND PLANE, REVEALING PORTFOLIO UNDERNEATH) */}
           <div
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
-              height: '50%',
+              height: '50.1%',
               background: 'var(--color-bg-deep)',
               zIndex: 10,
               clipPath: isUnzipping
                 ? `polygon(${planeProgress}% 0%, 100% 0%, 100% 100%, ${planeProgress}% 100%)`
                 : 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
               transition: 'none',
-              transform: isUnzipping ? `translateY(-${planeProgress * 0.4}%)` : 'translateY(0%)',
+              transform: isUnzipping ? `translateY(-${planeProgress * 0.85}%)` : 'translateY(0%)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              padding: 'clamp(1.5rem, 4vw, 3rem)',
+              padding: 'clamp(1.5rem, 4vw, 3.5rem)',
               boxSizing: 'border-box',
-              borderBottom: '1px dashed rgba(255, 107, 44, 0.4)',
+              borderBottom: '2px dashed var(--color-accent-primary)',
             }}
           >
-            {/* Top Editorial Metadata Header */}
+            {/* Top Editorial Header */}
             <div
               style={{
                 display: 'flex',
@@ -110,22 +110,22 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                 width: '100%',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                 <div
                   style={{
-                    width: '0.45rem',
-                    height: '0.45rem',
+                    width: '0.5rem',
+                    height: '0.5rem',
                     borderRadius: '50%',
                     background: 'var(--color-accent-primary)',
-                    boxShadow: '0 0 10px var(--color-accent-primary)',
+                    boxShadow: '0 0 12px var(--color-accent-primary)',
                   }}
                 />
                 <span
                   className="font-mono"
                   style={{
-                    fontSize: '0.65rem',
-                    fontWeight: 700,
-                    letterSpacing: '0.2em',
+                    fontSize: '0.7rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.22em',
                     textTransform: 'uppercase',
                     color: 'var(--color-text-secondary)',
                   }}
@@ -137,13 +137,13 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
               <span
                 className="font-mono"
                 style={{
-                  fontSize: '0.65rem',
+                  fontSize: '0.7rem',
                   fontWeight: 700,
-                  letterSpacing: '0.18em',
+                  letterSpacing: '0.2em',
                   color: 'var(--color-text-muted)',
                 }}
               >
-                1.9441° S, 30.0619° E
+                1.9441° S, 30.0619° E · KIGALI
               </span>
             </div>
 
@@ -152,16 +152,16 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
               style={{
                 textAlign: 'center',
                 alignSelf: 'center',
-                marginBottom: '-1.5rem',
+                marginBottom: '-1.75rem',
               }}
             >
               <motion.h1
                 className="font-display"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={phase >= 2 ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4 }}
                 style={{
-                  fontSize: 'clamp(2rem, 5vw, 4.25rem)',
+                  fontSize: 'clamp(2.25rem, 5.5vw, 4.75rem)',
                   fontWeight: 900,
                   letterSpacing: '-0.02em',
                   lineHeight: 1,
@@ -175,49 +175,49 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
             </div>
           </div>
 
-          {/* BOTTOM PANEL (UNZIPS DOWNWARDS BEHIND PLANE) */}
+          {/* BOTTOM PANEL (UNZIPS DOWNWARDS BEHIND PLANE, REVEALING PORTFOLIO UNDERNEATH) */}
           <div
             style={{
               position: 'absolute',
               bottom: 0,
               left: 0,
               right: 0,
-              height: '50%',
+              height: '50.1%',
               background: 'var(--color-bg-deep)',
               zIndex: 10,
               clipPath: isUnzipping
                 ? `polygon(${planeProgress}% 0%, 100% 0%, 100% 100%, ${planeProgress}% 100%)`
                 : 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
               transition: 'none',
-              transform: isUnzipping ? `translateY(${planeProgress * 0.4}%)` : 'translateY(0%)',
+              transform: isUnzipping ? `translateY(${planeProgress * 0.85}%)` : 'translateY(0%)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              padding: 'clamp(1.5rem, 4vw, 3rem)',
+              padding: 'clamp(1.5rem, 4vw, 3.5rem)',
               boxSizing: 'border-box',
-              borderTop: '1px dashed rgba(255, 107, 44, 0.4)',
+              borderTop: '2px dashed var(--color-accent-primary)',
             }}
           >
-            {/* Bottom Half Subtitles */}
+            {/* Bottom Subtitles */}
             <div
               style={{
                 textAlign: 'center',
                 alignSelf: 'center',
-                marginTop: '-1rem',
+                marginTop: '-1.25rem',
               }}
             >
               <motion.div
                 className="font-display"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={phase >= 2 ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.1 }}
                 style={{
-                  fontSize: 'clamp(0.9rem, 2vw, 1.5rem)',
+                  fontSize: 'clamp(1rem, 2.2vw, 1.75rem)',
                   fontWeight: 700,
-                  letterSpacing: '0.2em',
+                  letterSpacing: '0.22em',
                   textTransform: 'uppercase',
                   color: 'var(--color-accent-primary)',
-                  marginBottom: '0.4rem',
+                  marginBottom: '0.5rem',
                 }}
               >
                 SOFTWARE ENGINEER
@@ -229,8 +229,8 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                 animate={phase >= 3 ? { opacity: 1 } : {}}
                 transition={{ duration: 0.3 }}
                 style={{
-                  fontSize: 'clamp(0.6rem, 1vw, 0.8rem)',
-                  letterSpacing: '0.25em',
+                  fontSize: 'clamp(0.65rem, 1.2vw, 0.85rem)',
+                  letterSpacing: '0.28em',
                   color: 'var(--color-text-tertiary)',
                   textTransform: 'uppercase',
                 }}
@@ -251,20 +251,21 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
               <span
                 className="font-mono"
                 style={{
-                  fontSize: '0.65rem',
-                  letterSpacing: '0.2em',
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.22em',
                   color: 'var(--color-text-tertiary)',
                   textTransform: 'uppercase',
                 }}
               >
-                {isUnzipping ? 'UNZIPPING_PORTFOLIO...' : 'INITIALIZING_SYSTEM...'}
+                {isUnzipping ? 'UNZIPPING_PAGE...' : 'INITIALIZING_SYSTEM...'}
               </span>
 
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.2rem' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.3rem' }}>
                 <span
                   className="font-mono"
                   style={{
-                    fontSize: 'clamp(2rem, 4vw, 3rem)',
+                    fontSize: 'clamp(2.5rem, 5vw, 3.75rem)',
                     fontWeight: 900,
                     color: 'var(--color-text-primary)',
                     fontVariantNumeric: 'tabular-nums',
@@ -276,8 +277,8 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                 <span
                   className="font-mono"
                   style={{
-                    fontSize: '0.85rem',
-                    fontWeight: 700,
+                    fontSize: '1rem',
+                    fontWeight: 800,
                     color: 'var(--color-accent-primary)',
                   }}
                 >
@@ -287,7 +288,7 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
             </div>
           </div>
 
-          {/* FLYING PLANE ZIPPER RUNNER & SEAM TRAIL */}
+          {/* PROMINENT JET PLANE & ZIPPER SLIDER RUNNER */}
           {isUnzipping && (
             <div
               style={{
@@ -296,45 +297,65 @@ export default function CinematicPreloader({ onComplete }: CinematicPreloaderPro
                 left: 0,
                 right: 0,
                 height: 0,
-                zIndex: 20,
+                zIndex: 30,
                 pointerEvents: 'none',
               }}
             >
-              {/* Glowing Trailing Laser / Zip Seam Line */}
+              {/* Glowing Jet Trail & Zipper Seam Line */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '-1px',
+                  top: '-2px',
                   left: 0,
                   width: `${planeProgress}%`,
-                  height: '3px',
+                  height: '4px',
                   background: 'linear-gradient(90deg, transparent 0%, var(--color-accent-primary) 100%)',
-                  boxShadow: '0 0 15px var(--color-accent-primary)',
+                  boxShadow: '0 0 20px var(--color-accent-primary), 0 0 40px var(--color-accent-primary)',
                 }}
               />
 
-              {/* Jet Plane Zipper Runner Icon */}
+              {/* Large Jet Plane & Zipper Tag Slider */}
               <div
                 style={{
                   position: 'absolute',
-                  top: '-18px',
-                  left: `calc(${planeProgress}% - 12px)`,
+                  top: '-42px',
+                  left: `calc(${planeProgress}% - 40px)`,
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.3rem',
-                  transform: 'rotate(12deg)',
+                  gap: '0.5rem',
+                  transform: 'rotate(10deg)',
                   transition: 'none',
-                  filter: 'drop-shadow(0 0 12px var(--color-accent-primary))',
+                  filter: 'drop-shadow(0 0 16px var(--color-accent-primary))',
                 }}
               >
+                {/* Large Jet Plane Icon */}
                 <Plane
-                  size={32}
+                  size={84}
                   style={{
                     color: 'var(--color-accent-primary)',
                     fill: 'var(--color-accent-primary)',
                     strokeWidth: 1.5,
                   }}
                 />
+
+                {/* Zipper Pull Tag Label */}
+                <div
+                  className="font-mono"
+                  style={{
+                    background: 'var(--color-accent-primary)',
+                    color: '#000000',
+                    fontWeight: 900,
+                    fontSize: '0.65rem',
+                    padding: '0.2rem 0.6rem',
+                    letterSpacing: '0.15em',
+                    boxShadow: '0 0 12px var(--color-accent-primary)',
+                    textTransform: 'uppercase',
+                    whiteSpace: 'nowrap',
+                    marginLeft: '-1rem',
+                  }}
+                >
+                  UNZIP
+                </div>
               </div>
             </div>
           )}
