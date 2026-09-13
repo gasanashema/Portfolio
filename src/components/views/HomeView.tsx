@@ -23,7 +23,20 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
       <NsCodex />
 
       {/* Page Navigation Callouts */}
-      <section id="quick-nav">
+      <motion.section
+        id="quick-nav"
+        initial={{ opacity: 0, y: 40, scale: 0.96 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ amount: 0.2 }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          position: 'relative',
+          minHeight: 'calc(100vh - 5rem)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}
+      >
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%' }}>
           <div
             className="liquid-glass-card"
@@ -71,7 +84,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </motion.div>
   );
 }

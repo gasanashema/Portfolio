@@ -134,10 +134,11 @@ html {
 section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - 5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }

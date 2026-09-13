@@ -53,10 +53,20 @@ const WHY_DOMAINS = [
 
 export default function NsCodex() {
   return (
-    <section
+    <motion.section
       id="nscodex"
       aria-labelledby="nscodex-heading"
-      style={{ scrollMarginTop: '4rem' }}
+      initial={{ opacity: 0, y: 40, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ amount: 0.2 }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+      style={{
+        position: 'relative',
+        minHeight: 'calc(100vh - 5rem)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
     >
       {/* Section Header */}
       <div style={{ marginBottom: '1.25rem' }}>
@@ -185,6 +195,6 @@ export default function NsCodex() {
           </div>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
