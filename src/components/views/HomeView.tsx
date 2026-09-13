@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../Hero';
 import About from '../About';
+import Timeline from '../Timeline';
 import NsCodex from '../NsCodex';
 import { ArrowRight, FolderGit2, Mail } from 'lucide-react';
 
@@ -23,6 +24,7 @@ export default function HomeView({ onNavigate, onSelectProject }: HomeViewProps)
     >
       <Hero />
       <About />
+      <Timeline />
       <NsCodex onSelectProject={onSelectProject} onNavigate={onNavigate} />
 
       {/* Page Navigation Callouts */}
