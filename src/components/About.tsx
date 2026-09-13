@@ -1,258 +1,271 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { IDENTITY } from '../config';
-import { Terminal, Cpu, Lightbulb } from 'lucide-react';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 35 },
-  visible: { opacity: 1, y: 0 },
-};
+import { Terminal, Cpu, Server, Workflow, Lightbulb } from 'lucide-react';
 
 export default function About() {
   return (
     <section
       id="about"
       aria-labelledby="about-heading"
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        gap: '4rem',
-        alignItems: 'center',
-        scrollMarginTop: '6rem',
-      }}
-      className="about-grid"
+      style={{ scrollMarginTop: '4rem' }}
     >
-      {/* Editorial Story Column */}
-      <motion.div
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        style={{ maxWidth: '44rem' }}
-      >
-        <span className="section-label" style={{ marginBottom: '1.25rem', display: 'flex' }}>
-          01 — INTRODUCTION
-        </span>
-
-        <h2
-          id="about-heading"
-          className="font-display"
-          style={{
-            fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)',
-            fontWeight: 900,
-            lineHeight: 0.95,
-            letterSpacing: '-0.03em',
-            textTransform: 'uppercase',
-            marginBottom: '1.75rem',
-          }}
+      {/* Compact Section Header */}
+      <div style={{ marginBottom: '1.25rem' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          A Little About Me
-        </h2>
-
-        {/* Narrative */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1.25rem',
-            fontSize: '1.025rem',
-            color: 'var(--color-text-secondary)',
-            fontWeight: 300,
-            lineHeight: 1.8,
-          }}
-        >
-          <p>
-            I'm <strong style={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>Shema Philbert Gasana</strong>, a software engineer from Rwanda. My journey started with software development and gradually expanded into full-stack engineering, backend systems, databases, DevOps, and infrastructure.
-          </p>
-
-          <p>
-            I enjoy understanding how things work beneath the interface — not only writing the code that users see, but also understanding the APIs, databases, services, containers, infrastructure, and deployment processes behind them.
-          </p>
-
-          <p>
-            I build web applications, experiment with new technologies, work on practical product ideas, and continuously challenge myself to become a better engineer. I'm particularly interested in the space where software engineering meets systems, infrastructure, and real-world problems.
-          </p>
-        </div>
-
-        {/* A Thought Callout */}
-        <div
-          className="liquid-glass-card"
-          style={{
-            marginTop: '2rem',
-            padding: '1.5rem 1.75rem',
-            borderRadius: 'var(--border-radius-lg)',
-            borderLeft: '4px solid var(--color-accent-primary)',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-            <Lightbulb size={16} style={{ color: 'var(--color-accent-primary)' }} />
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.65rem',
-                fontWeight: 800,
-                letterSpacing: '0.2em',
-                color: 'var(--color-accent-primary)',
-                textTransform: 'uppercase',
-              }}
-            >
-              # A THOUGHT
-            </span>
-          </div>
-          <p
+          <span className="section-label" style={{ marginBottom: '0.4rem', display: 'flex' }}>
+            01 — ABOUT ME
+          </span>
+          <h2
+            id="about-heading"
             className="font-display"
             style={{
-              fontSize: '1.2rem',
-              fontWeight: 600,
-              color: 'var(--color-text-primary)',
-              lineHeight: 1.4,
+              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+              fontWeight: 900,
+              lineHeight: 0.95,
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase',
             }}
           >
-            "I don't just want to build interfaces.
-            <br />
-            I want to understand the systems behind them."
-          </p>
-        </div>
-      </motion.div>
+            ENG. <span className="text-gradient-flow">SHEMA PHILBERT GASANA</span>
+          </h2>
+        </motion.div>
+      </div>
 
-      {/* Identity Showcase Column */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, scale: 0.92 },
-          visible: { opacity: 1, scale: 1 },
+      {/* Single Flexbox Container: Compact Avatar Card + Structured About Content Side-by-Side */}
+      <div
+        className="about-flex-container"
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'stretch',
+          gap: '1.25rem',
         }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-        style={{ position: 'relative' }}
       >
-        {/* Main Identity Card */}
-        <div
+        {/* Left Column: Decreased Compact Profile Graphic Card */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="liquid-glass-card"
           style={{
-            aspectRatio: '1',
-            borderRadius: 'var(--border-radius-xl)',
+            width: '210px',
+            flexShrink: 0,
+            padding: '1.25rem 1rem',
+            borderRadius: 0,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '3rem',
+            textAlign: 'center',
             position: 'relative',
+            border: '1px solid rgba(255, 107, 44, 0.3)',
+            background: 'linear-gradient(135deg, rgba(255, 107, 44, 0.08), rgba(10, 10, 15, 0.95))',
           }}
         >
-          {/* Ambient inner glow */}
+          {/* Avatar Icon Box */}
           <div
             style={{
-              position: 'absolute',
-              inset: 0,
-              borderRadius: 'inherit',
-              background:
-                'radial-gradient(circle at 35% 35%, rgba(255, 107, 44, 0.08) 0%, transparent 65%)',
-              pointerEvents: 'none',
-            }}
-          />
-
-          <Terminal
-            size={64}
-            style={{
-              color: 'var(--color-accent-primary)',
-              position: 'relative',
-              zIndex: 1,
-              filter: 'drop-shadow(0 0 30px rgba(255, 107, 44, 0.4))',
-            }}
-          />
-
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 1,
-              marginTop: '1.5rem',
-              textAlign: 'center',
+              width: '3.75rem',
+              height: '3.75rem',
+              borderRadius: 0,
+              background: 'linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary))',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#ffffff',
+              boxShadow: '0 0 20px rgba(255, 107, 44, 0.4)',
+              marginBottom: '0.75rem',
             }}
           >
-            <p
-              className="font-display"
-              style={{
-                fontSize: '0.9rem',
-                fontWeight: 800,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: '#ffffff',
-              }}
-            >
-              SHEMA PHILBERT GASANA
-            </p>
-            <p
-              className="font-mono"
-              style={{
-                fontSize: '0.55rem',
-                letterSpacing: '0.2em',
-                color: 'var(--color-accent-secondary)',
-                marginTop: '0.25rem',
-                textTransform: 'uppercase',
-              }}
-            >
-              SOFTWARE ENGINEER · KIGALI, RWANDA
-            </p>
+            <Terminal size={24} />
           </div>
-        </div>
 
-        {/* Floating Status Pill */}
+          <span
+            className="font-display"
+            style={{
+              fontSize: '0.85rem',
+              fontWeight: 900,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#ffffff',
+              lineHeight: 1.1,
+            }}
+          >
+            SHEMA PHILBERT
+          </span>
+
+          <span
+            className="font-mono"
+            style={{
+              fontSize: '0.55rem',
+              letterSpacing: '0.12em',
+              color: 'var(--color-accent-primary)',
+              marginTop: '0.35rem',
+              textTransform: 'uppercase',
+              fontWeight: 700,
+            }}
+          >
+            SOFTWARE ENGINEER
+          </span>
+
+          <span
+            className="font-mono"
+            style={{
+              fontSize: '0.5rem',
+              letterSpacing: '0.1em',
+              color: 'var(--color-text-tertiary)',
+              marginTop: '0.15rem',
+              textTransform: 'uppercase',
+            }}
+          >
+            KIGALI, RWANDA
+          </span>
+
+          {/* Active Node Badge */}
+          <div
+            style={{
+              marginTop: '0.85rem',
+              padding: '0.25rem 0.55rem',
+              background: 'rgba(16, 185, 129, 0.12)',
+              border: '1px solid rgba(16, 185, 129, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.4rem',
+            }}
+          >
+            <div className="status-dot active" />
+            <span className="font-mono" style={{ fontSize: '0.5rem', fontWeight: 800, color: '#10b981', letterSpacing: '0.1em' }}>
+              AVAILABLE
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Right Column: Structured About Content (Pillars + Stats + Philosophy) */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="liquid-glass-card"
+          transition={{ duration: 0.5, delay: 0.1 }}
           style={{
-            position: 'absolute',
-            bottom: '-1rem',
-            right: '-0.5rem',
-            padding: '0.75rem 1.35rem',
-            borderRadius: 'var(--border-radius-md)',
+            flex: 1,
             display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
+            flexDirection: 'column',
+            gap: '0.85rem',
+            justifyContent: 'space-between',
           }}
         >
-          <div className="status-dot active" />
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.58rem',
-                fontWeight: 700,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: '#ffffff',
-              }}
-            >
-              SYSTEMS & DEVOPS
-            </span>
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.5rem',
-                color: 'var(--color-accent-primary)',
-                letterSpacing: '0.1em',
-              }}
-            >
-              Full-Stack Engineering
-            </span>
+          {/* 3 Core Focus Pillars */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.65rem' }}>
+            <div className="glass-panel" style={{ padding: '0.85rem 1rem', borderRadius: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+                <Cpu size={14} style={{ color: 'var(--color-accent-primary)' }} />
+                <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.1em' }}>
+                  FULL-STACK APPS
+                </span>
+              </div>
+              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                Building responsive, user-centric web platforms & scalable frontend applications.
+              </p>
+            </div>
+
+            <div className="glass-panel" style={{ padding: '0.85rem 1rem', borderRadius: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+                <Server size={14} style={{ color: 'var(--color-accent-secondary)' }} />
+                <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: 'var(--color-accent-secondary)', letterSpacing: '0.1em' }}>
+                  BACKEND & APIS
+                </span>
+              </div>
+              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                Architecting robust RESTful microservices, databases, and secure server pipelines.
+              </p>
+            </div>
+
+            <div className="glass-panel" style={{ padding: '0.85rem 1rem', borderRadius: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+                <Workflow size={14} style={{ color: '#38bdf8' }} />
+                <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: '#38bdf8', letterSpacing: '0.1em' }}>
+                  DEVOPS & CLOUD
+                </span>
+              </div>
+              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                Automating deployments with Docker, GitLab CI/CD, Kubernetes & Cloud infrastructure.
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Stats Strip */}
+          <div
+            className="liquid-glass-card"
+            style={{
+              padding: '0.75rem 1.15rem',
+              borderRadius: 0,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+              gap: '0.75rem',
+              alignItems: 'center',
+            }}
+          >
+            <div>
+              <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
+                LOCATION
+              </span>
+              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff' }}>
+                Kigali, Rwanda
+              </span>
+            </div>
+
+            <div>
+              <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
+                EDUCATION
+              </span>
+              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff' }}>
+                AUCA Software Eng.
+              </span>
+            </div>
+
+            <div>
+              <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
+                PROJECTS BUILT
+              </span>
+              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-accent-primary)' }}>
+                10+ Production Apps
+              </span>
+            </div>
+          </div>
+
+          {/* 1-Line Engineering Philosophy */}
+          <div
+            className="liquid-glass-card"
+            style={{
+              padding: '0.75rem 1.15rem',
+              borderRadius: 0,
+              borderLeft: '3px solid var(--color-accent-primary)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.65rem',
+            }}
+          >
+            <Lightbulb size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+            <p className="font-display" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>
+              "I don't just build interfaces — I engineer the reliable systems, APIs, and pipelines behind them."
+            </p>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
 
       <style>{`
-        .about-grid {
-          grid-template-columns: 1fr;
-        }
-        @media (min-width: 900px) {
-          .about-grid {
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 5rem;
+        @media (max-width: 767px) {
+          .about-flex-container {
+            flex-direction: column !important;
+          }
+          .about-flex-container > div:first-child {
+            width: 100% !important;
           }
         }
       `}</style>
