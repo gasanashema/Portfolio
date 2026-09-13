@@ -5,6 +5,7 @@ import Background from './components/Background';
 import Navbar from './components/Navbar';
 import CommandPalette from './components/CommandPalette';
 import Footer from './components/Footer';
+import CinematicPreloader from './components/CinematicPreloader';
 
 import HomeView from './components/views/HomeView';
 import WorkView from './components/views/WorkView';
@@ -27,6 +28,7 @@ type PageId = 'home' | 'work' | 'tech' | 'journey' | 'contact';
  * sub-page views, interactive command palette, and modal inspectors.
  */
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activePage, setActivePage] = useState<PageId>('home');
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -76,6 +78,11 @@ export default function App() {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
+      {/* Standalone Cinematic Preloader Overlay */}
+      {isLoading && (
+        <CinematicPreloader onComplete={() => setIsLoading(false)} />
+      )}
+
       {/* Ambient Neural Particle Canvas */}
       <Background theme={theme} />
 
