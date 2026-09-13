@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import {
-  ShieldCheck,
   Github,
   Linkedin,
   Mail,
@@ -82,79 +81,15 @@ export default function Hero() {
       }}
     >
       <motion.div style={{ opacity, scale, y, x: dx }}>
-        {/* Top Metadata Badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: '0.6rem',
-            marginBottom: '1.75rem',
-          }}
-        >
-          <div
-            className="liquid-glass-card"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              padding: '0.45rem 1.15rem',
-              borderRadius: 'var(--border-radius-pill)',
-            }}
-          >
-            <ShieldCheck size={13} style={{ color: 'var(--color-accent-primary)' }} />
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.58rem',
-                fontWeight: 700,
-                letterSpacing: '0.25em',
-                textTransform: 'uppercase',
-                color: 'var(--color-accent-primary)',
-              }}
-            >
-              {IDENTITY.role}
-            </span>
-          </div>
-
-          <div
-            className="glass-panel"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.45rem 1rem',
-              borderRadius: 'var(--border-radius-pill)',
-            }}
-          >
-            <div className="status-dot active" />
-            <span
-              className="font-mono"
-              style={{
-                fontSize: '0.55rem',
-                fontWeight: 700,
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: 'var(--color-text-secondary)',
-              }}
-            >
-              NODE: KIGALI, RWANDA
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Compact Editorial Name */}
+        {/* Editorial Name */}
         <h1
           id="hero-heading"
           className="font-display"
           style={{
-            fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
+            fontSize: 'clamp(2.5rem, 6vw, 4.75rem)',
             fontWeight: 900,
-            lineHeight: 1.05,
-            letterSpacing: '-0.03em',
+            lineHeight: 1.02,
+            letterSpacing: '-0.035em',
             marginBottom: '1.5rem',
             textTransform: 'uppercase',
           }}
