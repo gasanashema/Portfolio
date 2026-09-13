@@ -204,49 +204,6 @@ export default function Hero() {
             })}
           </div>
         </motion.div>
-
-        {/* Hero Micro Metadata Strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '2rem',
-            marginTop: '3.5rem',
-            paddingTop: '1.5rem',
-            borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-          }}
-        >
-          {IDENTITY.stats.map((stat, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
-              <span
-                className="font-mono"
-                style={{
-                  fontSize: '0.55rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.2em',
-                  color: 'var(--color-text-muted)',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {stat.label}
-              </span>
-              <span
-                className="font-display"
-                style={{
-                  fontSize: '0.9rem',
-                  fontWeight: 800,
-                  color: 'var(--color-text-primary)',
-                  letterSpacing: '0.04em',
-                }}
-              >
-                {stat.value}
-              </span>
-            </div>
-          ))}
-        </motion.div>
       </motion.div>
     </section>
   );
