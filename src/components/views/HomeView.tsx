@@ -5,11 +5,14 @@ import About from '../About';
 import NsCodex from '../NsCodex';
 import { ArrowRight, FolderGit2, Mail } from 'lucide-react';
 
+import type { Project } from '../../data/projects';
+
 interface HomeViewProps {
   onNavigate: (page: string) => void;
+  onSelectProject?: (project: Project) => void;
 }
 
-export default function HomeView({ onNavigate }: HomeViewProps) {
+export default function HomeView({ onNavigate, onSelectProject }: HomeViewProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -20,7 +23,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
     >
       <Hero />
       <About />
-      <NsCodex />
+      <NsCodex onSelectProject={onSelectProject} onNavigate={onNavigate} />
 
       {/* Page Navigation Callouts */}
       <motion.section

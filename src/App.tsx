@@ -142,7 +142,11 @@ export default function App() {
       >
         <AnimatePresence mode="wait">
           {activePage === 'home' && (
-            <HomeView key="home" onNavigate={navigateTo} />
+            <HomeView
+              key="home"
+              onNavigate={navigateTo}
+              onSelectProject={(project) => setSelectedProject(project)}
+            />
           )}
 
           {activePage === 'work' && (

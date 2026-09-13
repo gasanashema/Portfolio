@@ -1,57 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Terminal, Database, Server, Cpu, Globe, HeartPulse, GraduationCap, Building2, Car, Briefcase, Users } from 'lucide-react';
+import { PROJECTS, type Project } from '../data/projects';
+import { FolderGit2, ArrowRight, Code2, Terminal, Database, Server } from 'lucide-react';
 
-interface BuildDomain {
-  key: string;
-  name: string;
-  tagline: string;
-  icon: React.ReactNode;
+interface NsCodexProps {
+  onSelectProject?: (project: Project) => void;
+  onNavigate?: (page: string) => void;
 }
 
-const BUILD_DOMAINS: BuildDomain[] = [
-  {
-    key: '01',
-    name: 'FULL-STACK APPS',
-    tagline: 'End-to-End Web Platforms',
-    icon: <Terminal size={18} style={{ color: 'var(--color-accent-primary)' }} />,
-  },
-  {
-    key: '02',
-    name: 'BACKEND & APIS',
-    tagline: 'REST Microservices & DB Architecture',
-    icon: <Database size={18} style={{ color: 'var(--color-accent-secondary)' }} />,
-  },
-  {
-    key: '03',
-    name: 'DEVOPS & CLOUD',
-    tagline: 'Docker, CI/CD & Kubernetes',
-    icon: <Server size={18} style={{ color: 'var(--color-accent-tertiary)' }} />,
-  },
-  {
-    key: '04',
-    name: 'SOFTWARE PRODUCTS',
-    tagline: 'Problem to Scalable Product',
-    icon: <Cpu size={18} style={{ color: '#4ade80' }} />,
-  },
-  {
-    key: '05',
-    name: 'IMPACT SYSTEMS',
-    tagline: 'Digital Transformation in Rwanda & Africa',
-    icon: <Globe size={18} style={{ color: '#f87171' }} />,
-  },
-];
+const FEATURED_PROJECTS = PROJECTS.slice(0, 4);
 
-const WHY_DOMAINS = [
-  { title: 'HEALTHCARE', icon: <HeartPulse size={16} style={{ color: 'var(--color-accent-tertiary)' }} />, tag: 'Health Tech' },
-  { title: 'EDUCATION', icon: <GraduationCap size={16} style={{ color: 'var(--color-accent-secondary)' }} />, tag: 'EdTech' },
-  { title: 'PUBLIC SERVICES', icon: <Building2 size={16} style={{ color: '#38bdf8' }} />, tag: 'GovTech' },
-  { title: 'TRANSPORTATION', icon: <Car size={16} style={{ color: '#facc15' }} />, tag: 'Mobility' },
-  { title: 'BUSINESS', icon: <Briefcase size={16} style={{ color: 'var(--color-accent-primary)' }} />, tag: 'FinTech' },
-  { title: 'YOUTH TECH', icon: <Users size={16} style={{ color: '#4ade80' }} />, tag: 'Mentorship' },
-];
+const ICON_MAP: Record<string, React.ReactNode> = {
+  'PRJ-01': <Terminal size={22} style={{ color: 'var(--color-accent-primary)' }} />,
+  'PRJ-02': <Code2 size={22} style={{ color: 'var(--color-accent-secondary)' }} />,
+  'PRJ-03': <Server size={22} style={{ color: 'var(--color-accent-tertiary)' }} />,
+  'PRJ-04': <Database size={22} style={{ color: '#4ade80' }} />,
+};
 
-export default function NsCodex() {
+export default function NsCodex({ onSelectProject, onNavigate }: NsCodexProps) {
   return (
     <motion.section
       id="nscodex"
@@ -69,15 +35,10 @@ export default function NsCodex() {
       }}
     >
       {/* Section Header */}
-      <div style={{ marginBottom: '1.25rem' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+      <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+        <div>
           <span className="section-label" style={{ marginBottom: '0.4rem', display: 'flex' }}>
-            02 — CORE DOMAINS
+            02 — FEATURED PROJECTS
           </span>
           <h2
             id="nscodex-heading"
@@ -92,108 +53,146 @@ export default function NsCodex() {
           >
             WHAT I <span className="text-gradient-flow">BUILD</span>
           </h2>
-        </motion.div>
+        </div>
+
+        {onNavigate && (
+          <button
+            onClick={() => onNavigate('work')}
+            className="btn-glass"
+            style={{ borderRadius: 0, padding: '0.55rem 1.15rem', fontSize: '0.7rem' }}
+          >
+            <span>VIEW ALL PROJECTS</span>
+            <ArrowRight size={14} />
+          </button>
+        )}
       </div>
 
-      {/* Grid of Domains + Why Domains */}
+      {/* Grid of Showcase Projects */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '1rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1.25rem',
         }}
       >
-        {/* What I Build Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="liquid-glass-card"
-          style={{
-            padding: '1.15rem',
-            borderRadius: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.65rem',
-          }}
-        >
-          <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.15em' }}>
-            // ENGINEERING FOCUS
-          </span>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-            {BUILD_DOMAINS.map((domain) => (
-              <div
-                key={domain.key}
-                className="glass-panel"
-                style={{
-                  padding: '0.55rem 0.85rem',
-                  borderRadius: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                }}
-              >
-                {domain.icon}
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)', lineHeight: 1.1 }}>
-                    {domain.name}
+        {FEATURED_PROJECTS.map((project, i) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.08 }}
+            className="liquid-glass-card"
+            onClick={() => onSelectProject && onSelectProject(project)}
+            style={{
+              padding: '1.25rem',
+              borderRadius: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.85rem',
+              cursor: 'pointer',
+              border: '1px solid var(--glass-l2-border)',
+              background: 'var(--glass-l2-bg)',
+            }}
+          >
+            {/* Thumbnail Header Block */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '0.85rem 1rem',
+                background: 'var(--color-bg-elevated)',
+                border: '1px solid var(--glass-l1-border)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div
+                  style={{
+                    width: '2.5rem',
+                    height: '2.5rem',
+                    background: 'var(--color-bg-surface)',
+                    border: '1px solid var(--glass-l2-border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  {ICON_MAP[project.code] || <FolderGit2 size={20} style={{ color: 'var(--color-accent-primary)' }} />}
+                </div>
+                <div>
+                  <span className="font-mono" style={{ fontSize: '0.6rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.12em', display: 'block' }}>
+                    {project.code}
                   </span>
-                  <span className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--color-text-tertiary)' }}>
-                    {domain.tagline}
+                  <span className="font-mono" style={{ fontSize: '0.55rem', color: 'var(--color-text-tertiary)', textTransform: 'uppercase' }}>
+                    {project.category}
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
-        </motion.div>
 
-        {/* Why I Build Domains */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="liquid-glass-card"
-          style={{
-            padding: '1.15rem',
-            borderRadius: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.65rem',
-          }}
-        >
-          <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: 'var(--color-accent-secondary)', letterSpacing: '0.15em' }}>
-            // DOMAINS & SECTORS
-          </span>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '0.45rem' }}>
-            {WHY_DOMAINS.map((item) => (
-              <div
-                key={item.title}
-                className="glass-panel"
+              <span
+                className="font-mono"
                 style={{
-                  padding: '0.65rem',
-                  borderRadius: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.35rem',
+                  fontSize: '0.52rem',
+                  fontWeight: 700,
+                  padding: '0.2rem 0.5rem',
+                  background: 'rgba(16, 185, 129, 0.12)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  color: '#10b981',
+                  textTransform: 'uppercase',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  {item.icon}
-                  <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)' }}>
-                    {item.tag}
-                  </span>
-                </div>
-                <span className="font-display" style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-primary)', lineHeight: 1.1 }}>
-                  {item.title}
+                {project.status}
+              </span>
+            </div>
+
+            {/* Project Title */}
+            <h3
+              className="font-display"
+              style={{
+                fontSize: '1.15rem',
+                fontWeight: 900,
+                color: 'var(--color-text-primary)',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.15,
+              }}
+            >
+              {project.title}
+            </h3>
+
+            {/* 1-Sentence Short Description */}
+            <p
+              style={{
+                fontSize: '0.825rem',
+                color: 'var(--color-text-secondary)',
+                lineHeight: 1.45,
+              }}
+            >
+              {project.tagline}.
+            </p>
+
+            {/* Tech Stack Pills */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: 'auto', paddingTop: '0.5rem' }}>
+              {project.techStack.map((tech) => (
+                <span
+                  key={tech}
+                  className="font-mono"
+                  style={{
+                    fontSize: '0.58rem',
+                    fontWeight: 700,
+                    padding: '0.2rem 0.55rem',
+                    background: 'var(--color-bg-elevated)',
+                    border: '1px solid var(--glass-l1-border)',
+                    color: 'var(--color-accent-primary)',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {tech}
                 </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
     </motion.section>
   );
