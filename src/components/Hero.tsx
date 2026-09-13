@@ -5,6 +5,7 @@ import {
   Linkedin,
   Mail,
   FileText,
+  Gitlab,
 } from 'lucide-react';
 import { IDENTITY, SOCIALS } from '../config';
 
@@ -13,6 +14,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ size?: number }>> = {
   Linkedin,
   Mail,
   FileText,
+  Gitlab,
 };
 
 function StaggeredLetter({ char, index }: { char: string; index: number }) {
@@ -149,9 +151,8 @@ export default function Hero() {
           </a>
 
           <a
-            href={IDENTITY.github}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/Philbert_Shema_Gasana_CV.pdf"
+            download="Philbert_Shema_Gasana_CV.pdf"
             className="btn-glass"
             style={{ borderRadius: 0, padding: '0.65rem 1.35rem', fontSize: '0.7rem' }}
           >

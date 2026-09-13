@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   Github,
-  Youtube,
+  Gitlab,
   Linkedin,
+  Mail,
+  FileText,
+  Youtube,
   Instagram,
   Twitter,
   MessageCircle,
@@ -14,8 +17,11 @@ import { SOCIAL_CHANNELS, type SocialChannel } from '../data/socials';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Github: <Github size={22} className="text-amber-400" />,
-  Youtube: <Youtube size={22} className="text-red-400" />,
+  Gitlab: <Gitlab size={22} className="text-orange-500" />,
   Linkedin: <Linkedin size={22} className="text-amber-500" />,
+  Mail: <Mail size={22} className="text-amber-300" />,
+  FileText: <FileText size={22} className="text-amber-400" />,
+  Youtube: <Youtube size={22} className="text-red-400" />,
   Instagram: <Instagram size={22} className="text-orange-400" />,
   Twitter: <Twitter size={22} className="text-yellow-400" />,
   MessageCircle: <MessageCircle size={22} className="text-emerald-400" />,

@@ -1,6 +1,6 @@
 /**
  * Selected Work & Projects
- * Product & Systems Registry for Shema Philbert Gasana
+ * Official Project Registry for Philbert Shema Gasana (From CV)
  */
 
 export interface Project {
@@ -23,223 +23,233 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    id: 'bulk-email-app',
+    id: 'ai-vital',
     code: 'PRJ-01',
-    title: 'Bulk Email App',
-    category: 'Full-Stack',
+    title: 'AI Vital',
+    category: 'Health & Data',
     status: 'Built & Deployed',
-    year: '2024',
-    tagline: 'Personalized bulk communication workflow without bloat',
-    description:
-      'A browser-based application for sending personalized bulk emails from a CSV file. Supports personalized recipients, custom signatures, footers, calls-to-action, and structured email content.',
-    problem:
-      'Traditional bulk mailing solutions are often overly complex, expensive, or store unnecessary recipient data on third-party servers.',
-    solution:
-      'Engineered a lightweight web interface and backend using Node.js and Gmail SMTP that processes CSV recipient data on-the-fly with zero persistent user storage.',
-    techStack: ['React', 'Node.js', 'Express.js', 'Gmail SMTP', 'CSV'],
-    featured: true,
-    highlights: [
-      'Personalized recipient tag injection',
-      'Custom email signature and footer support',
-      'Lightweight workflow with zero storage overhead',
-    ],
-  },
-  {
-    id: 'site-track',
-    code: 'PRJ-02',
-    title: 'Site Track',
-    category: 'Systems & Backend',
-    status: 'Project',
-    year: '2024',
-    tagline: 'Activity monitoring and project organization platform',
-    description:
-      'A software platform focused on improving the way projects, activities, and progress can be organized, monitored, and analyzed in real-time.',
-    problem:
-      'Project management in complex environments often suffers from fragmented activity tracking and lack of clear progress visibility.',
-    solution:
-      'Built a centralized tracking system structured around clear activity pipelines, milestone tracking, and intuitive status dashboards.',
-    techStack: ['TypeScript', 'React', 'Node.js', 'PostgreSQL'],
-    featured: true,
-    highlights: [
-      'Centralized project milestone monitoring',
-      'Structured activity logging and audit trails',
-      'Clear digital workflows for teams',
-    ],
-  },
-  {
-    id: 'hotel-management-system',
-    code: 'PRJ-03',
-    title: 'Hotel Management System',
-    category: 'Full-Stack',
-    status: 'Project',
-    year: '2024',
-    tagline: 'Comprehensive operational platform for hospitality businesses',
-    description:
-      'A management platform designed around the operational needs of hotels. Brings reservations, room management, guest profiles, services, and daily operations into one digital workflow.',
-    problem:
-      'Hospitality operations frequently depend on disconnected tools for front desk, reservations, and room maintenance.',
-    solution:
-      'Synthesized a unified management portal connecting guest bookings, room availability, service requests, and staff roles into an intuitive dashboard.',
-    techStack: ['Java', 'Spring Boot', 'MySQL', 'React', 'Tailwind CSS'],
-    featured: true,
-    highlights: [
-      'Unified booking and room management pipeline',
-      'Guest relationship and service tracking',
-      'Role-based access for operational staff',
-    ],
-  },
-  {
-    id: 'health-sphere',
-    code: 'PRJ-04',
-    title: 'Health Sphere',
-    category: 'Health & Data',
-    status: 'Development',
     year: '2024–2025',
-    tagline: 'Predictive data platform for healthcare appointment compliance',
+    tagline: 'National AI-powered public health surveillance platform for early disease outbreak detection',
     description:
-      'A healthcare-oriented system exploring how data can help healthcare providers identify patients who may be likely to miss appointments, improving operational decisions in clinics.',
-    problem:
-      'High rates of missed medical appointments disrupt healthcare scheduling and lead to underutilized clinical resources.',
-    solution:
-      'Constructed a REST API backend with Django REST Framework and MongoDB Atlas featuring JWT authentication and patient risk factor analytics.',
-    techStack: ['Django REST Framework', 'MongoDB Atlas', 'JWT', 'Python', 'React'],
-    featured: true,
-    highlights: [
-      'Secure healthcare staff authentication & JWT management',
-      'Patient history and appointment risk tracking',
-      'Data-driven insights to improve clinical attendance',
-    ],
-  },
-  {
-    id: 'outbreak-intelligence',
-    code: 'PRJ-05',
-    title: 'Outbreak Intelligence',
-    category: 'Health & Data',
-    status: 'Concept',
-    year: '2025',
-    tagline: 'Rwanda-focused public health disease monitoring concept',
-    description:
-      'A concept for monitoring disease and outbreak patterns using data collected from healthcare facilities across Rwanda. Analyzes emerging hospital data to provide early risk indicators.',
+      'A national-scale platform for early detection and monitoring of disease outbreaks, built for Rwanda\'s RBC and Ministry of Health across a 7-phase, 18-module rollout. Includes predictive models for outbreak trend forecasting, case risk classification, and anomaly detection in public health data.',
     problem:
       'Manual disease outbreak tracking leads to delayed public health responses during early transmission phases.',
     solution:
-      'Designed an early warning dashboard architecture combining daily hospital reporting pipelines with analytics to detect disease patterns earlier.',
-    techStack: ['Python', 'PostgreSQL', 'Data Analytics', 'Next.js'],
+      'Engineered a national-scale public health surveillance platform combining daily reporting pipelines, outbreak trend forecasting, and automated anomaly detection.',
+    techStack: ['Python', 'Django', 'React', 'PostgreSQL'],
+    githubUrl: 'https://github.com/gasanashema',
     featured: true,
     highlights: [
-      'Daily hospital and disease data aggregation concept',
-      'Pattern identification dashboard for health authorities',
-      'Vision for ML integration in regional public health',
+      'Built for Rwanda RBC and Ministry of Health (7-phase rollout)',
+      'Outbreak trend forecasting and anomaly detection',
+      'Case risk classification algorithms',
     ],
   },
   {
-    id: 'wedding-plan-management-system',
-    code: 'PRJ-06',
-    title: 'Wedding Plan Management System',
+    id: 'sitetrack',
+    code: 'PRJ-02',
+    title: 'SiteTrack',
+    category: 'Systems & Backend',
+    status: 'Built & Deployed',
+    year: '2024',
+    tagline: 'Distributed construction project management system tracking multi-site materials and labor',
+    description:
+      'A distributed desktop platform for managing construction projects, tracking material stock movements and labor payments across multiple sites.',
+    problem:
+      'Multi-site construction projects suffer from fragmented inventory tracking, delayed payment logging, and lack of real-time material audit trails.',
+    solution:
+      'Constructed a Java RMI desktop platform connecting multi-site material stock tracking, labor payments, and messaging queues.',
+    techStack: ['Java', 'Swing', 'Java RMI', 'Hibernate', 'PostgreSQL', 'ActiveMQ', 'RabbitMQ'],
+    githubUrl: 'https://github.com/gasanashema/SiteTrack-ConstructionProjectMS',
+    featured: true,
+    highlights: [
+      'Multi-site construction material stock movements tracking',
+      'Labor payment logging and audit trails',
+      'Messaging integration with ActiveMQ & RabbitMQ',
+    ],
+  },
+  {
+    id: 'moni-share',
+    code: 'PRJ-03',
+    title: 'Moni-share',
     category: 'Full-Stack',
-    status: 'Development',
+    status: 'Built & Deployed',
     year: '2024',
-    tagline: 'Event management platform tailored for Rwandan wedding planning',
+    tagline: 'Full-stack car sharing platform connecting drivers and riders with decoupled architecture',
     description:
-      'A platform designed around the planning and organization of weddings in Rwanda. Explores separate experiences for couples, workflows, budgeting, vendors, and new-home templates.',
+      'A full-stack car sharing platform connecting drivers and riders, built as a team project with a decoupled backend and frontend.',
     problem:
-      'Traditional event planning in Rwanda involves fragmented communications across spreadsheets, messages, and manual budgeting.',
+      'Urban commuters face high transit costs and fragmented ride coordination.',
     solution:
-      'Engineered an all-in-one digital workspace with dedicated portals for couples, event planners, budget tracking, and vendor coordination.',
-    techStack: ['PHP', 'Laravel', 'Livewire', 'Tailwind CSS', 'MySQL'],
-    featured: false,
+      'Engineered a decoupled car sharing system connecting verified drivers and riders with real-time route matching and NestJS REST services.',
+    techStack: ['React', 'TypeScript', 'NestJS', 'PostgreSQL'],
+    githubUrl: 'https://github.com/gasanashema',
+    featured: true,
     highlights: [
-      'Customized workflows for Rwandan wedding traditions',
-      'Budget allocation and expenditure tracking engine',
-      'Vendor management and new-home planning templates',
+      'Decoupled NestJS backend and React frontend architecture',
+      'Commuter-to-driver route coordination',
+      'Secure user authentication and trip management',
     ],
   },
   {
-    id: 'car-sharing',
-    code: 'PRJ-07',
-    title: 'Car Sharing',
-    category: 'Product Concepts',
-    status: 'Concept',
-    year: '2024',
-    tagline: 'Local mobility and transportation coordination platform',
-    description:
-      'A mobility platform concept exploring how people can share rides and coordinate transportation in Kigali and regional urban contexts.',
-    problem:
-      'Urban commuting and intercity travel often suffer from high transit costs and inefficient vehicle seat utilization.',
-    solution:
-      'Designed a ride-matching architecture connecting commuters with verified drivers while addressing local payment and routing dynamics.',
-    techStack: ['Node.js', 'React Native', 'MongoDB', 'Express.js'],
-    featured: false,
-    highlights: [
-      'Commuter-to-driver route matching concept',
-      'Focus on local transportation challenges in Rwanda',
-      'Safety and verified user identity framework',
-    ],
-  },
-  {
-    id: 'e-and-i-travel',
-    code: 'PRJ-08',
-    title: 'E&I Travel',
+    id: 'shop-management-system-bsms',
+    code: 'PRJ-04',
+    title: 'Shop Management System (BSMS)',
     category: 'Full-Stack',
-    status: 'Project',
+    status: 'Built & Deployed',
     year: '2024',
-    tagline: 'Travel & destination discovery digital product',
+    tagline: 'Boutique inventory ledger with daily sales reporting and debt management',
     description:
-      'A travel-oriented digital product exploring how travel experiences, destinations, and bookings can be presented and managed through a modern web platform.',
+      'A boutique inventory ledger with daily sales reporting and debt management, supporting English and Kinyarwanda.',
     problem:
-      'Travel agency websites often struggle to balance rich visual exploration with fast booking and service management.',
+      'Small retail businesses lack multilingual inventory tools to track daily sales and member debt balances.',
     solution:
-      'Created a dynamic travel web application featuring destination catalogs, itinerary previews, and responsive booking flows.',
-    techStack: ['Next.js', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
-    featured: false,
+      'Built a lightweight inventory ledger supporting real-time sales reporting, customer debt tracking, and bilingual UI (English & Kinyarwanda).',
+    techStack: ['PHP', 'Bootstrap', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/Shop-Management-System-BSMS-',
+    featured: true,
     highlights: [
-      'Immersive destination showcase and itinerary previews',
-      'Seamless booking request workflow',
-      'High-performance responsive design',
+      'Bilingual interface (English & Kinyarwanda)',
+      'Daily sales reporting and inventory ledger',
+      'Customer debt balance management',
     ],
   },
   {
-    id: 'african-bee-co',
-    code: 'PRJ-09',
-    title: 'African Bee Co',
-    category: 'Product Concepts',
-    status: 'Concept',
+    id: 'saving-and-credits-ms',
+    code: 'PRJ-05',
+    title: 'Saving & Credits Management System',
+    category: 'Systems & Backend',
+    status: 'Built & Deployed',
     year: '2024',
-    tagline: 'Digital business concept for African apiculture products',
+    tagline: 'Microfinance and SACCO credit tracking system for managing member savings and loans',
     description:
-      'A digital commerce concept built around African bee products and opportunities in local honey production, branding, and digital distribution.',
+      'A microfinance and SACCO credit tracking system for managing member savings, loans, repayments, and financial reports.',
     problem:
-      'Local agricultural producers face challenges reaching direct consumer markets with modern digital branding.',
+      'SACCOs and microfinance groups face manual record-keeping errors in member savings, loan interest, and repayment schedules.',
     solution:
-      'Designed a product story and e-commerce platform concept showcasing sustainable bee farming and authentic African honey products.',
-    techStack: ['React', 'Vite', 'Tailwind CSS', 'Stripe'],
+      'Developed a robust Node.js backend calculating interest accrual, member savings balances, loan repayment tracking, and financial statements.',
+    techStack: ['Node.js', 'Express.js', 'React', 'TypeScript', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/Saving-and-credits-MS',
     featured: false,
     highlights: [
-      'Intersection of tech, local agriculture, and branding',
-      'Modern digital story for traditional produce',
-      'Direct-to-consumer e-commerce concept',
+      'SACCO member savings and credit ledger',
+      'Loan interest calculation and repayment tracking',
+      'Automated financial statement reporting',
     ],
   },
   {
     id: 'nziza-view-hotel',
-    code: 'PRJ-10',
-    title: 'Nziza View Hotel',
+    code: 'PRJ-06',
+    title: 'Nziza View Hotel Booking System',
     category: 'Full-Stack',
-    status: 'Project',
+    status: 'Built & Deployed',
     year: '2024',
-    tagline: 'Hospitality brand experience and digital presence',
+    tagline: 'Hotel reservation and property management platform handling bookings and room availability',
     description:
-      'A hospitality digital project exploring how a hotel can present its unique character, rooms, dining services, and guest experience online.',
+      'A hotel reservation and property management platform handling bookings, room availability, and guest records.',
     problem:
-      'Standard template websites fail to capture the atmosphere and distinct identity of boutique hospitality properties.',
+      'Boutique hotels struggle with manual room booking management and guest history logging.',
     solution:
-      'Crafted a tailored digital presence with smooth transitions, interactive room previews, and direct inquiry integration.',
-    techStack: ['HTML', 'CSS', 'JavaScript', 'PHP'],
+      'Built a Laravel & Livewire management system for real-time room availability, online reservation requests, and guest records.',
+    techStack: ['Laravel', 'Livewire', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/Nziza-View-Hotel',
     featured: false,
     highlights: [
-      'Custom visual story reflecting property character',
-      'Interactive room and amenity showcase',
-      'Direct reservation inquiry integration',
+      'Real-time room availability and reservation workflow',
+      'Guest profile and history logging',
+      'Built with Laravel, Livewire & MySQL',
+    ],
+  },
+  {
+    id: 'pick-and-go-ms',
+    code: 'PRJ-07',
+    title: 'Pick and Go Management System',
+    category: 'Full-Stack',
+    status: 'Built & Deployed',
+    year: '2024',
+    tagline: 'E-commerce storefront with customer management, inventory tracking, and payment processing',
+    description:
+      'An e-commerce storefront with customer management, inventory tracking, and payment processing.',
+    problem:
+      'Local e-commerce merchants need integrated storefronts with automated payment verification.',
+    solution:
+      'Created a responsive e-commerce web application integrated with PayPal Sandbox payment gateway and live inventory tracking.',
+    techStack: ['PHP', 'Bootstrap', 'jQuery', 'PayPal Sandbox', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/Pick-and-Go-MS',
+    featured: false,
+    highlights: [
+      'Customer order management and product catalog',
+      'PayPal Sandbox payment integration',
+      'Live inventory tracking pipeline',
+    ],
+  },
+  {
+    id: 'exam-hall-seating-management',
+    code: 'PRJ-08',
+    title: 'Exam Hall Seating Management System',
+    category: 'Systems & Backend',
+    status: 'Built & Deployed',
+    year: '2024',
+    tagline: 'Automated seating plan generator and hall allocation manager for academic institutions',
+    description:
+      'An automated seating plan generator and hall allocation manager for students, teachers, and admins.',
+    problem:
+      'Academic institutions waste hours manually arranging exam seating plans and preventing student seating conflicts.',
+    solution:
+      'Engineered an automated seating plan generation algorithm that distributes hall allocations for students and invigilators.',
+    techStack: ['PHP', 'Bootstrap', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/Exam-Hall-Seating-management',
+    featured: false,
+    highlights: [
+      'Automated exam seating plan generator',
+      'Hall allocation algorithm preventing student seating conflict',
+      'Admin, teacher, and student portals',
+    ],
+  },
+  {
+    id: 'patient-management-system',
+    code: 'PRJ-09',
+    title: 'Patient Management System',
+    category: 'Health & Data',
+    status: 'Built & Deployed',
+    year: '2024',
+    tagline: 'Healthcare management platform for patient registration, record tracking, and appointments',
+    description:
+      'A healthcare management platform for patient registration, record tracking, and appointment handling.',
+    problem:
+      'Clinical record keeping requires reliable desktop applications for offline patient registration and medical history tracking.',
+    solution:
+      'Built a Java Swing desktop application connected to MySQL for patient record management and appointment schedules.',
+    techStack: ['Java', 'Swing', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/Patient-Management-System',
+    featured: false,
+    highlights: [
+      'Patient registration and medical history ledger',
+      'Appointment scheduling and clinical records',
+      'Built with Java Swing & MySQL',
+    ],
+  },
+  {
+    id: 'student-registration-system',
+    code: 'PRJ-10',
+    title: 'Student Registration System',
+    category: 'Systems & Backend',
+    status: 'Built & Deployed',
+    year: '2024',
+    tagline: 'Academic registration platform for managing student records and course enrollment',
+    description:
+      'A student registration platform for managing student records, course enrollment, and academic information.',
+    problem:
+      'Educational institutions require structured student enrollment systems with course validation rules.',
+    solution:
+      'Developed a Java desktop registration system for student record management, course selection, and academic transcripts.',
+    techStack: ['Java', 'Swing', 'MySQL'],
+    githubUrl: 'https://github.com/gasanashema/StudentRegistrationSystem',
+    featured: false,
+    highlights: [
+      'Student profile and course enrollment management',
+      'Academic transcript and record tracking',
+      'Built with Java Swing & MySQL',
     ],
   },
 ];
