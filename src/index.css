@@ -5,54 +5,51 @@
 
 /* ---------- CSS Custom Properties (Design Tokens) ---------- */
 :root {
-  /* Core Palette */
-  --color-bg-deep: #060608;
-  --color-bg-surface: #0a0a0f;
-  --color-bg-elevated: #111118;
-  --color-bg-overlay: rgba(6, 6, 8, 0.85);
+  /* Core Light Palette */
+  --color-bg-deep: #f8fafc;
+  --color-bg-surface: #ffffff;
+  --color-bg-elevated: #f1f5f9;
+  --color-bg-overlay: rgba(248, 250, 252, 0.92);
 
-  /* Brand Accents – Warm Signature */
-  --color-accent-primary: #ff6b2c;      /* Vibrant Orange */
-  --color-accent-secondary: #ffaa00;    /* Amber Gold */
-  --color-accent-tertiary: #ff4757;     /* Warm Red */
-  --color-accent-warm-yellow: #ffc312;  /* Bright Amber */
-  --color-accent-ember: #e84118;        /* Deep Ember */
-  --color-accent-glow: rgba(255, 107, 44, 0.15);
+  /* Brand Accents – High-Contrast Signature Orange/Amber */
+  --color-accent-primary: #ea580c;      /* Rich Deep Orange */
+  --color-accent-secondary: #d97706;    /* Amber Gold */
+  --color-accent-tertiary: #e11d48;     /* Rose Red */
+  --color-accent-warm-yellow: #ca8a04;  /* Deep Gold */
+  --color-accent-ember: #c2410c;        /* Deep Ember */
+  --color-accent-glow: rgba(234, 88, 12, 0.15);
 
   /* Functional Status Colors */
-  --color-status-active: #10b981;       /* Emerald */
-  --color-status-research: #3b82f6;     /* Sky Blue */
-  --color-status-warm: #ffaa00;         /* Amber */
+  --color-status-active: #059669;       /* Emerald */
+  --color-status-research: #2563eb;     /* Blue */
+  --color-status-warm: #d97706;         /* Amber */
 
-  /* Text Hierarchy */
-  --color-text-primary: #f5f4f0;
-  --color-text-secondary: #a39e95;
-  --color-text-tertiary: #615a51;
-  --color-text-muted: #38332c;
+  /* Text Hierarchy for Light Mode */
+  --color-text-primary: #0f172a;        /* High Contrast Slate Black */
+  --color-text-secondary: #334155;      /* Slate Gray */
+  --color-text-tertiary: #64748b;       /* Medium Slate */
+  --color-text-muted: #94a3b8;          /* Light Slate Muted */
 
-  /* Smoked Glass Hierarchy (3-Tier) */
-  /* Level 1: Subtle transparent ambient surface */
-  --glass-l1-bg: rgba(255, 255, 255, 0.018);
-  --glass-l1-border: rgba(255, 255, 255, 0.05);
+  /* Smoked Glass Hierarchy (Light Mode 3-Tier) */
+  --glass-l1-bg: rgba(255, 255, 255, 0.85);
+  --glass-l1-border: rgba(15, 23, 42, 0.08);
   --glass-l1-blur: 12px;
 
-  /* Level 2: Standard card / panel surface */
   --glass-l2-bg: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.012) 50%,
-    rgba(255, 107, 44, 0.02) 100%
+    #ffffff 0%,
+    #f8fafc 50%,
+    rgba(234, 88, 12, 0.03) 100%
   );
-  --glass-l2-border: rgba(255, 255, 255, 0.07);
-  --glass-l2-border-hover: rgba(255, 107, 44, 0.28);
+  --glass-l2-border: rgba(15, 23, 42, 0.1);
+  --glass-l2-border-hover: rgba(234, 88, 12, 0.4);
   --glass-l2-blur: 24px;
-  --glass-l2-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --glass-l2-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
 
-  /* Level 3: Elevated overlays, Nav, Command Palette, Modals */
-  --glass-l3-bg: rgba(10, 10, 15, 0.88);
-  --glass-l3-border: rgba(255, 255, 255, 0.12);
+  --glass-l3-bg: rgba(255, 255, 255, 0.96);
+  --glass-l3-border: rgba(15, 23, 42, 0.12);
   --glass-l3-blur: 36px;
-  --glass-l3-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --glass-l3-shadow: 0 20px 50px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.05);
 
   /* Spacing & Layout */
   --section-gap: 2.5rem;

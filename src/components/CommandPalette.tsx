@@ -337,7 +337,7 @@ export default function CommandPalette({
                   background: 'transparent',
                   border: 'none',
                   outline: 'none',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   fontFamily: 'var(--font-body)',
                   fontSize: '0.95rem',
                 }}
@@ -414,7 +414,7 @@ export default function CommandPalette({
                             style={{
                               fontSize: '0.875rem',
                               fontWeight: 600,
-                              color: isSelected ? '#ffffff' : 'var(--color-text-primary)',
+                              color: 'var(--color-text-primary)',
                               whiteSpace: 'nowrap',
                               overflow: 'hidden',
                               textOverflow: 'ellipsis',

@@ -123,8 +123,8 @@ export default function Background() {
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
 
-      // Clear with deep warm-tinted black
-      ctx.fillStyle = '#060608';
+      // Clear with light slate background
+      ctx.fillStyle = '#f8fafc';
       ctx.fillRect(0, 0, w, h);
 
       // Mouse-following warm glow (desktop only)

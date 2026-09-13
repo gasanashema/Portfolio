@@ -127,7 +127,7 @@ export default function NsCodex() {
               >
                 {domain.icon}
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.1 }}>
+                  <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)', lineHeight: 1.1 }}>
                     {domain.name}
                   </span>
                   <span className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--color-text-tertiary)' }}>
@@ -177,7 +177,7 @@ export default function NsCodex() {
                     {item.tag}
                   </span>
                 </div>
-                <span className="font-display" style={{ fontSize: '0.78rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.1 }}>
+                <span className="font-display" style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--color-text-primary)', lineHeight: 1.1 }}>
                   {item.title}
                 </span>
               </div>

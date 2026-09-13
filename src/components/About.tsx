@@ -93,7 +93,7 @@ export default function About() {
               fontWeight: 900,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: '#ffffff',
+              color: 'var(--color-text-primary)',
               lineHeight: 1.1,
             }}
           >
@@ -215,7 +215,7 @@ export default function About() {
               <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
                 LOCATION
               </span>
-              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff' }}>
+              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
                 Kigali, Rwanda
               </span>
             </div>
@@ -224,7 +224,7 @@ export default function About() {
               <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
                 EDUCATION
               </span>
-              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: '#ffffff' }}>
+              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
                 AUCA Software Eng.
               </span>
             </div>
@@ -252,7 +252,7 @@ export default function About() {
             }}
           >
             <Lightbulb size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
-            <p className="font-display" style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>
+            <p className="font-display" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.3 }}>
               "I don't just build interfaces — I engineer the reliable systems, APIs, and pipelines behind them."
             </p>
           </div>

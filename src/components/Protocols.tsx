@@ -368,7 +368,7 @@ export default function Protocols({ onSelectProject }: ProtocolsProps) {
                 <span className="font-mono" style={{ fontSize: '0.55rem', color: 'var(--color-accent-primary)', fontWeight: 700 }}>
                   {stg.step}
                 </span>
-                <span className="font-display" style={{ fontSize: '0.9rem', fontWeight: 800, color: '#ffffff', letterSpacing: '0.05em' }}>
+                <span className="font-display" style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--color-text-primary)', letterSpacing: '0.05em' }}>
                   {stg.title}
                 </span>
                 <span style={{ fontSize: '0.7rem', color: 'var(--color-text-tertiary)' }}>

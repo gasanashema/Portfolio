@@ -112,7 +112,7 @@ export default function TechMatrix() {
                       fontSize: '0.95rem',
                       fontWeight: 800,
                       textTransform: 'uppercase',
-                      color: '#ffffff',
+                      color: 'var(--color-text-primary)',
                       letterSpacing: '0.04em',
                       lineHeight: 1.1,
                     }}
@@ -153,7 +153,7 @@ export default function TechMatrix() {
                         style={{
                           fontSize: '0.78rem',
                           fontWeight: 800,
-                          color: '#ffffff',
+                          color: 'var(--color-text-primary)',
                           lineHeight: 1.1,
                         }}
                       >

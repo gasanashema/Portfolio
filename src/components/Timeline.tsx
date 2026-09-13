@@ -267,7 +267,7 @@ export default function Timeline() {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
                 <div>
-                  <h4 className="font-display" style={{ fontSize: '1.25rem', fontWeight: 900, color: '#ffffff' }}>
+                  <h4 className="font-display" style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--color-text-primary)' }}>
                     {exp.role}
                   </h4>
                   <span className="font-display" style={{ fontSize: '0.9rem', color: 'var(--color-accent-primary)', fontWeight: 600 }}>
@@ -316,7 +316,7 @@ export default function Timeline() {
               </h4>
             </div>
 
-            <h3 className="font-display" style={{ fontSize: '1.35rem', fontWeight: 900, color: '#ffffff', marginBottom: '0.25rem' }}>
+            <h3 className="font-display" style={{ fontSize: '1.35rem', fontWeight: 900, color: 'var(--color-text-primary)', marginBottom: '0.25rem' }}>
               {EDUCATION_DATA.institution}
             </h3>
             <p className="font-display" style={{ fontSize: '0.95rem', color: 'var(--color-accent-secondary)', marginBottom: '1rem' }}>
@@ -372,7 +372,7 @@ export default function Timeline() {
               {MILESTONES.map((m) => (
                 <div key={m.title} className="glass-panel" style={{ padding: '0.85rem 1.15rem', borderRadius: 'var(--border-radius-md)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
-                    <h5 className="font-display" style={{ fontSize: '0.95rem', fontWeight: 800, color: '#ffffff' }}>
+                    <h5 className="font-display" style={{ fontSize: '0.95rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
                       {m.title}
                     </h5>
                     <span className="font-mono" style={{ fontSize: '0.6rem', color: 'var(--color-accent-secondary)' }}>

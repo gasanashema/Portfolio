@@ -178,7 +178,7 @@ export default function Projects({ onSelectProject }: ProjectsProps) {
                   fontSize: '1.1rem',
                   fontWeight: 900,
                   textTransform: 'uppercase',
-                  color: '#ffffff',
+                  color: 'var(--color-text-primary)',
                   marginBottom: '0.25rem',
                   lineHeight: 1.15,
                 }}
