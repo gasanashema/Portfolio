@@ -19,22 +19,22 @@ export default function About() {
         justifyContent: 'center',
       }}
     >
-      {/* Compact Section Header */}
-      <div style={{ marginBottom: '1.25rem' }}>
+      {/* Section Header */}
+      <div style={{ marginBottom: '1.75rem' }}>
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="section-label" style={{ marginBottom: '0.4rem', display: 'flex' }}>
+          <span className="section-label" style={{ marginBottom: '0.5rem', display: 'flex' }}>
             01 — ABOUT ME
           </span>
           <h2
             id="about-heading"
             className="font-display"
             style={{
-              fontSize: 'clamp(2rem, 4vw, 3.25rem)',
+              fontSize: 'clamp(2.25rem, 4.5vw, 3.5rem)',
               fontWeight: 900,
               lineHeight: 0.95,
               letterSpacing: '-0.02em',
@@ -46,17 +46,18 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Single Flexbox Container: Compact Avatar Card + Structured About Content Side-by-Side */}
+      {/* Single Flexbox Container: Profile Graphic Card + Structured About Content Side-by-Side */}
       <div
         className="about-flex-container"
         style={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'stretch',
-          gap: '1.25rem',
+          gap: '1.5rem',
+          minHeight: '62vh',
         }}
       >
-        {/* Left Column: Decreased Compact Profile Graphic Card */}
+        {/* Left Column: Profile Graphic Card */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -64,9 +65,9 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="liquid-glass-card"
           style={{
-            width: '210px',
+            width: '250px',
             flexShrink: 0,
-            padding: '1.25rem 1rem',
+            padding: '2.25rem 1.25rem',
             borderRadius: 0,
             display: 'flex',
             flexDirection: 'column',
@@ -81,8 +82,8 @@ export default function About() {
           {/* Avatar Icon Box */}
           <div
             style={{
-              width: '3.75rem',
-              height: '3.75rem',
+              width: '4.5rem',
+              height: '4.5rem',
               borderRadius: 0,
               background: 'var(--color-accent-primary)',
               display: 'flex',
@@ -90,21 +91,21 @@ export default function About() {
               justifyContent: 'center',
               color: '#ffffff',
               boxShadow: 'none',
-              marginBottom: '0.75rem',
+              marginBottom: '1rem',
             }}
           >
-            <Terminal size={24} />
+            <Terminal size={28} />
           </div>
 
           <span
             className="font-display"
             style={{
-              fontSize: '0.85rem',
+              fontSize: '0.95rem',
               fontWeight: 900,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
               color: 'var(--color-text-primary)',
-              lineHeight: 1.1,
+              lineHeight: 1.15,
             }}
           >
             SHEMA PHILBERT
@@ -113,10 +114,10 @@ export default function About() {
           <span
             className="font-mono"
             style={{
-              fontSize: '0.55rem',
+              fontSize: '0.6rem',
               letterSpacing: '0.12em',
               color: 'var(--color-accent-primary)',
-              marginTop: '0.35rem',
+              marginTop: '0.45rem',
               textTransform: 'uppercase',
               fontWeight: 700,
             }}
@@ -127,10 +128,10 @@ export default function About() {
           <span
             className="font-mono"
             style={{
-              fontSize: '0.5rem',
+              fontSize: '0.55rem',
               letterSpacing: '0.1em',
               color: 'var(--color-text-tertiary)',
-              marginTop: '0.15rem',
+              marginTop: '0.2rem',
               textTransform: 'uppercase',
             }}
           >
@@ -140,17 +141,17 @@ export default function About() {
           {/* Active Node Badge */}
           <div
             style={{
-              marginTop: '0.85rem',
-              padding: '0.25rem 0.55rem',
+              marginTop: '1.25rem',
+              padding: '0.35rem 0.75rem',
               background: 'rgba(16, 185, 129, 0.12)',
               border: '1px solid rgba(16, 185, 129, 0.3)',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.4rem',
+              gap: '0.45rem',
             }}
           >
             <div className="status-dot active" />
-            <span className="font-mono" style={{ fontSize: '0.5rem', fontWeight: 800, color: '#10b981', letterSpacing: '0.1em' }}>
+            <span className="font-mono" style={{ fontSize: '0.55rem', fontWeight: 800, color: '#10b981', letterSpacing: '0.12em' }}>
               AVAILABLE
             </span>
           </div>
@@ -166,44 +167,44 @@ export default function About() {
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            gap: '0.85rem',
+            gap: '1.25rem',
             justifyContent: 'space-between',
           }}
         >
           {/* 3 Core Focus Pillars */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.65rem' }}>
-            <div className="glass-panel" style={{ padding: '0.85rem 1rem', borderRadius: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                <Cpu size={14} style={{ color: 'var(--color-accent-primary)' }} />
-                <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.1em' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', flex: 1 }}>
+            <div className="glass-panel" style={{ padding: '1.35rem 1.25rem', borderRadius: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                <Cpu size={16} style={{ color: 'var(--color-accent-primary)' }} />
+                <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.1em' }}>
                   FULL-STACK APPS
                 </span>
               </div>
-              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
                 Building responsive, user-centric web platforms & scalable frontend applications.
               </p>
             </div>
 
-            <div className="glass-panel" style={{ padding: '0.85rem 1rem', borderRadius: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                <Server size={14} style={{ color: 'var(--color-accent-secondary)' }} />
-                <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: 'var(--color-accent-secondary)', letterSpacing: '0.1em' }}>
+            <div className="glass-panel" style={{ padding: '1.35rem 1.25rem', borderRadius: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                <Server size={16} style={{ color: 'var(--color-accent-secondary)' }} />
+                <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--color-accent-secondary)', letterSpacing: '0.1em' }}>
                   BACKEND & APIS
                 </span>
               </div>
-              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
                 Architecting robust RESTful microservices, databases, and secure server pipelines.
               </p>
             </div>
 
-            <div className="glass-panel" style={{ padding: '0.85rem 1rem', borderRadius: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
-                <Workflow size={14} style={{ color: '#38bdf8' }} />
-                <span className="font-mono" style={{ fontSize: '0.625rem', fontWeight: 800, color: '#38bdf8', letterSpacing: '0.1em' }}>
+            <div className="glass-panel" style={{ padding: '1.35rem 1.25rem', borderRadius: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                <Workflow size={16} style={{ color: '#38bdf8' }} />
+                <span className="font-mono" style={{ fontSize: '0.72rem', fontWeight: 800, color: '#38bdf8', letterSpacing: '0.1em' }}>
                   DEVOPS & CLOUD
                 </span>
               </div>
-              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
                 Automating deployments with Docker, GitLab CI/CD, Kubernetes & Cloud infrastructure.
               </p>
             </div>
@@ -213,37 +214,37 @@ export default function About() {
           <div
             className="liquid-glass-card"
             style={{
-              padding: '0.75rem 1.15rem',
+              padding: '1.15rem 1.5rem',
               borderRadius: 0,
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
-              gap: '0.75rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+              gap: '1rem',
               alignItems: 'center',
             }}
           >
             <div>
-              <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
+              <span className="font-mono" style={{ fontSize: '0.58rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block', marginBottom: '0.15rem' }}>
                 LOCATION
               </span>
-              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
+              <span className="font-display" style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
                 Kigali, Rwanda
               </span>
             </div>
 
             <div>
-              <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
+              <span className="font-mono" style={{ fontSize: '0.58rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block', marginBottom: '0.15rem' }}>
                 EDUCATION
               </span>
-              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
+              <span className="font-display" style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--color-text-primary)' }}>
                 AUCA Software Eng.
               </span>
             </div>
 
             <div>
-              <span className="font-mono" style={{ fontSize: '0.52rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block' }}>
+              <span className="font-mono" style={{ fontSize: '0.58rem', color: 'var(--color-text-tertiary)', letterSpacing: '0.1em', display: 'block', marginBottom: '0.15rem' }}>
                 PROJECTS BUILT
               </span>
-              <span className="font-display" style={{ fontSize: '0.82rem', fontWeight: 800, color: 'var(--color-accent-primary)' }}>
+              <span className="font-display" style={{ fontSize: '0.92rem', fontWeight: 800, color: 'var(--color-accent-primary)' }}>
                 10+ Production Apps
               </span>
             </div>
@@ -253,16 +254,16 @@ export default function About() {
           <div
             className="liquid-glass-card"
             style={{
-              padding: '0.75rem 1.15rem',
+              padding: '1.15rem 1.5rem',
               borderRadius: 0,
               borderLeft: '3px solid var(--color-accent-primary)',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.65rem',
+              gap: '0.85rem',
             }}
           >
-            <Lightbulb size={16} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
-            <p className="font-display" style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.3 }}>
+            <Lightbulb size={20} style={{ color: 'var(--color-accent-primary)', flexShrink: 0 }} />
+            <p className="font-display" style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-text-primary)', lineHeight: 1.4 }}>
               "I don't just build interfaces — I engineer the reliable systems, APIs, and pipelines behind them."
             </p>
           </div>
