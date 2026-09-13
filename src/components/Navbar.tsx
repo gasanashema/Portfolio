@@ -10,6 +10,8 @@ import {
   Code2,
   Menu,
   X,
+  Sun,
+  Moon,
 } from 'lucide-react';
 import { IDENTITY } from '../config';
 
@@ -17,6 +19,8 @@ interface NavbarProps {
   activePage: string;
   onNavigate: (page: string) => void;
   onOpenCommandPalette?: () => void;
+  theme?: 'light' | 'dark';
+  onToggleTheme?: () => void;
 }
 
 export interface NavItem {
@@ -34,7 +38,13 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'contact', icon: Mail, label: 'Archive & Direct Contact', badge: '16' },
 ];
 
-export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }: NavbarProps) {
+export default function Navbar({
+  activePage,
+  onNavigate,
+  onOpenCommandPalette,
+  theme = 'light',
+  onToggleTheme,
+}: NavbarProps) {
   const [hoveredItemId, setHoveredItemId] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
@@ -70,11 +80,9 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
             gap: '0.45rem',
             padding: '0.75rem 0.5rem',
             borderRadius: 0,
-            background: 'rgba(10, 10, 15, 0.94)',
-            backdropFilter: 'blur(28px)',
-            WebkitBackdropFilter: 'blur(28px)',
-            border: '1px solid rgba(255, 255, 255, 0.14)',
-            boxShadow: '0 16px 48px rgba(0, 0, 0, 0.75), 0 0 24px rgba(255, 107, 44, 0.08)',
+            background: 'var(--glass-l3-bg)',
+            border: '1px solid var(--glass-l3-border)',
+            boxShadow: 'none',
           }}
         >
           {/* Brand Home Header */}
@@ -89,13 +97,13 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
               height: '2.5rem',
               borderRadius: 0,
               border: 'none',
-              background: 'linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary))',
+              background: 'var(--color-accent-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#ffffff',
               cursor: 'pointer',
-              boxShadow: '0 0 16px rgba(255, 107, 44, 0.4)',
+              boxShadow: 'none',
               marginBottom: '0.2rem',
             }}
           >
@@ -113,18 +121,18 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                     position: 'absolute',
                     right: '3.25rem',
                     whiteSpace: 'nowrap',
-                    background: 'rgba(10, 10, 16, 0.96)',
+                    background: 'var(--color-bg-surface)',
                     border: '1px solid var(--color-accent-primary)',
                     padding: '0.45rem 0.85rem',
                     borderRadius: 0,
-                    color: '#ffffff',
+                    color: 'var(--color-text-primary)',
                     fontFamily: 'var(--font-display)',
                     fontSize: '0.675rem',
                     fontWeight: 800,
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
                     pointerEvents: 'none',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.8)',
+                    boxShadow: 'none',
                     zIndex: 20,
                   }}
                 >
@@ -138,7 +146,7 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
             style={{
               width: '1.4rem',
               height: '1px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: 'var(--glass-l1-border)',
               margin: '0.1rem 0',
             }}
           />
@@ -169,19 +177,19 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                           position: 'absolute',
                           right: '3.25rem',
                           whiteSpace: 'nowrap',
-                          background: 'rgba(10, 10, 16, 0.96)',
+                          background: 'var(--color-bg-surface)',
                           border: isActive
                             ? '1px solid var(--color-accent-primary)'
-                            : '1px solid rgba(255, 255, 255, 0.15)',
+                            : '1px solid var(--glass-l2-border)',
                           padding: '0.45rem 0.85rem',
                           borderRadius: 0,
-                          color: '#ffffff',
+                          color: 'var(--color-text-primary)',
                           fontFamily: 'var(--font-mono)',
                           fontSize: '0.65rem',
                           fontWeight: 700,
                           letterSpacing: '0.08em',
                           pointerEvents: 'none',
-                          boxShadow: '0 8px 28px rgba(0, 0, 0, 0.8)',
+                          boxShadow: 'none',
                           zIndex: 20,
                           display: 'flex',
                           alignItems: 'center',
@@ -206,23 +214,23 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                       borderRadius: 0,
                       border: isActive
                         ? '1px solid var(--color-accent-primary)'
-                        : '1px solid rgba(255, 255, 255, 0.08)',
+                        : '1px solid var(--glass-l2-border)',
                       background: isActive
-                        ? 'rgba(255, 107, 44, 0.2)'
+                        ? 'var(--color-accent-glow)'
                         : isHovered
-                        ? 'rgba(255, 255, 255, 0.1)'
-                        : 'rgba(255, 255, 255, 0.03)',
+                        ? 'var(--color-bg-elevated)'
+                        : 'var(--color-bg-surface)',
                       color: isActive
                         ? 'var(--color-accent-primary)'
                         : isHovered
-                        ? '#ffffff'
+                        ? 'var(--color-text-primary)'
                         : 'var(--color-text-secondary)',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       transition: 'all var(--transition-fast)',
-                      boxShadow: isActive ? '0 0 16px rgba(255, 107, 44, 0.35)' : 'none',
+                      boxShadow: 'none',
                     }}
                   >
                     <IconComponent size={16} />
@@ -250,13 +258,69 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
             style={{
               width: '1.4rem',
               height: '1px',
-              background: 'rgba(255, 255, 255, 0.12)',
+              background: 'var(--glass-l1-border)',
               margin: '0.1rem 0',
             }}
           />
 
           {/* Action Tools */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+            {/* Theme Toggle Button */}
+            <div
+              style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+              onMouseEnter={() => setHoveredItemId('theme')}
+              onMouseLeave={() => setHoveredItemId(null)}
+            >
+              <AnimatePresence>
+                {hoveredItemId === 'theme' && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: 10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    style={{
+                      position: 'absolute',
+                      right: '3.25rem',
+                      whiteSpace: 'nowrap',
+                      background: 'var(--color-bg-surface)',
+                      border: '1px solid var(--glass-l2-border)',
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: 0,
+                      color: 'var(--color-text-primary)',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
+                      pointerEvents: 'none',
+                      boxShadow: 'none',
+                      zIndex: 20,
+                    }}
+                  >
+                    Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <button
+                onClick={onToggleTheme}
+                aria-label={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
+                style={{
+                  width: '2.4rem',
+                  height: '2.4rem',
+                  borderRadius: 0,
+                  border: '1px solid var(--glass-l2-border)',
+                  background: 'var(--color-bg-surface)',
+                  color: 'var(--color-accent-primary)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all var(--transition-fast)',
+                }}
+              >
+                {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+              </button>
+            </div>
+
             {/* Search Command Palette Trigger */}
             <div
               style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
@@ -274,16 +338,16 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                       position: 'absolute',
                       right: '3.25rem',
                       whiteSpace: 'nowrap',
-                      background: 'rgba(10, 10, 16, 0.96)',
-                      border: '1px solid rgba(255, 255, 255, 0.18)',
+                      background: 'var(--color-bg-surface)',
+                      border: '1px solid var(--glass-l2-border)',
                       padding: '0.45rem 0.85rem',
                       borderRadius: 0,
-                      color: '#ffffff',
+                      color: 'var(--color-text-primary)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.65rem',
                       fontWeight: 700,
                       pointerEvents: 'none',
-                      boxShadow: '0 8px 28px rgba(0, 0, 0, 0.8)',
+                      boxShadow: 'none',
                       zIndex: 20,
                     }}
                   >
@@ -299,8 +363,8 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                   width: '2.4rem',
                   height: '2.4rem',
                   borderRadius: 0,
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid var(--glass-l2-border)',
+                  background: 'var(--color-bg-surface)',
                   color: 'var(--color-accent-primary)',
                   cursor: 'pointer',
                   display: 'flex',
@@ -330,16 +394,16 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                       position: 'absolute',
                       right: '3.25rem',
                       whiteSpace: 'nowrap',
-                      background: 'rgba(10, 10, 16, 0.96)',
-                      border: '1px solid rgba(255, 255, 255, 0.18)',
+                      background: 'var(--color-bg-surface)',
+                      border: '1px solid var(--glass-l2-border)',
                       padding: '0.45rem 0.85rem',
                       borderRadius: 0,
-                      color: '#ffffff',
+                      color: 'var(--color-text-primary)',
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.65rem',
                       fontWeight: 700,
                       pointerEvents: 'none',
-                      boxShadow: '0 8px 28px rgba(0, 0, 0, 0.8)',
+                      boxShadow: 'none',
                       zIndex: 20,
                     }}
                   >
@@ -357,8 +421,8 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                   width: '2.4rem',
                   height: '2.4rem',
                   borderRadius: 0,
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  border: '1px solid var(--glass-l2-border)',
+                  background: 'var(--color-bg-surface)',
                   color: 'var(--color-text-secondary)',
                   display: 'flex',
                   alignItems: 'center',
@@ -403,12 +467,10 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
             gap: '0.3rem',
             padding: '0.75rem 0.55rem',
             borderRadius: 0,
-            background: 'rgba(10, 10, 15, 0.94)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-            boxShadow: '0 12px 32px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 107, 44, 0.2)',
-            color: '#ffffff',
+            background: 'var(--glass-l3-bg)',
+            border: '1px solid var(--glass-l3-border)',
+            boxShadow: 'none',
+            color: 'var(--color-text-primary)',
             cursor: 'pointer',
           }}
         >
@@ -442,9 +504,7 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
               position: 'fixed',
               inset: 0,
               zIndex: 200,
-              background: 'rgba(6, 6, 8, 0.96)',
-              backdropFilter: 'blur(28px)',
-              WebkitBackdropFilter: 'blur(28px)',
+              background: 'var(--color-bg-deep)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
@@ -457,7 +517,7 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                borderBottom: '1px solid var(--glass-l2-border)',
                 paddingBottom: '1rem',
               }}
             >
@@ -465,7 +525,7 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                 <span className="font-mono" style={{ fontSize: '0.65rem', color: 'var(--color-accent-primary)', letterSpacing: '0.15em' }}>
                   SHEMA PHILBERT GASANA
                 </span>
-                <p className="font-display" style={{ fontSize: '1rem', fontWeight: 900, color: '#ffffff', textTransform: 'uppercase' }}>
+                <p className="font-display" style={{ fontSize: '1rem', fontWeight: 900, color: 'var(--color-text-primary)', textTransform: 'uppercase' }}>
                   Navigation Pages
                 </p>
               </div>
@@ -477,9 +537,9 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                   width: '2.5rem',
                   height: '2.5rem',
                   borderRadius: 0,
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  color: '#ffffff',
+                  border: '1px solid var(--glass-l2-border)',
+                  background: 'var(--color-bg-surface)',
+                  color: 'var(--color-text-primary)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -512,12 +572,12 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                       padding: '1rem 1.25rem',
                       borderRadius: 0,
                       background: isActive
-                        ? 'rgba(255, 107, 44, 0.18)'
-                        : 'rgba(255, 255, 255, 0.04)',
+                        ? 'var(--color-accent-glow)'
+                        : 'var(--color-bg-surface)',
                       border: isActive
                         ? '1px solid var(--color-accent-primary)'
-                        : '1px solid rgba(255, 255, 255, 0.08)',
-                      color: '#ffffff',
+                        : '1px solid var(--glass-l2-border)',
+                      color: 'var(--color-text-primary)',
                       textAlign: 'left',
                       cursor: 'pointer',
                     }}
@@ -529,7 +589,7 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
                         borderRadius: 0,
                         background: isActive
                           ? 'var(--color-accent-primary)'
-                          : 'rgba(255, 255, 255, 0.08)',
+                          : 'var(--color-bg-elevated)',
                         color: isActive ? '#ffffff' : 'var(--color-accent-primary)',
                         display: 'flex',
                         alignItems: 'center',
@@ -569,7 +629,18 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
             </div>
 
             {/* Actions */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid var(--glass-l2-border)' }}>
+              <button
+                onClick={() => {
+                  if (onToggleTheme) onToggleTheme();
+                }}
+                className="btn-glass"
+                style={{ width: '100%', justifyContent: 'center', borderRadius: 0 }}
+              >
+                {theme === 'light' ? <Moon size={15} /> : <Sun size={15} />}
+                <span>Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode</span>
+              </button>
+
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
@@ -609,3 +680,4 @@ export default function Navbar({ activePage, onNavigate, onOpenCommandPalette }:
     </>
   );
 }
+

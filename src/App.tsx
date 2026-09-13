@@ -32,6 +32,20 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedDoc, setSelectedDoc] = useState<DocArticle | null>(null);
 
+  // Theme State: 'light' | 'dark'
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  };
+
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,
@@ -63,9 +77,9 @@ export default function App() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
       {/* Ambient Neural Particle Canvas */}
-      <Background />
+      <Background theme={theme} />
 
-      {/* Hardware-Accelerated Scroll Progress Indicator */}
+      {/* Scroll Progress Indicator (Solid Color, No Gradients) */}
       <motion.div
         aria-hidden="true"
         style={{
@@ -74,8 +88,7 @@ export default function App() {
           left: 0,
           right: 0,
           height: '3px',
-          background:
-            'linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary), var(--color-accent-tertiary))',
+          background: 'var(--color-accent-primary)',
           transformOrigin: '0%',
           scaleX,
           zIndex: 200,
@@ -87,6 +100,8 @@ export default function App() {
         activePage={activePage}
         onNavigate={navigateTo}
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        theme={theme}
+        onToggleTheme={toggleTheme}
       />
 
       {/* Global Interactive Command Palette (Ctrl+K / ⌘K) */}

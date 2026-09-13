@@ -146,16 +146,16 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Massive Editorial Name */}
+        {/* Compact Editorial Name */}
         <h1
           id="hero-heading"
           className="font-display"
           style={{
-            fontSize: 'clamp(3rem, 9vw, 9.5rem)',
+            fontSize: 'clamp(1.75rem, 4vw, 3.25rem)',
             fontWeight: 900,
-            lineHeight: 0.88,
-            letterSpacing: '-0.045em',
-            marginBottom: '1.75rem',
+            lineHeight: 1.05,
+            letterSpacing: '-0.03em',
+            marginBottom: '1.5rem',
             textTransform: 'uppercase',
           }}
         >

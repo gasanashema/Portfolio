@@ -35,7 +35,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             </span>
             <FolderGit2 size={20} style={{ color: 'var(--color-accent-primary)' }} />
           </div>
-          <h3 className="font-display" style={{ fontSize: '1.25rem', fontWeight: 900, color: '#ffffff', marginBottom: '0.5rem' }}>
+          <h3 className="font-display" style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--color-text-primary)', marginBottom: '0.5rem' }}>
             Explore Project Catalog
           </h3>
           <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
@@ -58,7 +58,7 @@ export default function HomeView({ onNavigate }: HomeViewProps) {
             </span>
             <Mail size={20} style={{ color: 'var(--color-accent-secondary)' }} />
           </div>
-          <h3 className="font-display" style={{ fontSize: '1.25rem', fontWeight: 900, color: '#ffffff', marginBottom: '0.5rem' }}>
+          <h3 className="font-display" style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--color-text-primary)', marginBottom: '0.5rem' }}>
             Get in Touch with Shema
           </h3>
           <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '1.25rem' }}>

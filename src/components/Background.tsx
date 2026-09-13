@@ -69,12 +69,21 @@ function createParticle(w: number, h: number): Particle {
   };
 }
 
-export default function Background() {
+interface BackgroundProps {
+  theme?: 'light' | 'dark';
+}
+
+export default function Background({ theme = 'light' }: BackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
   const particlesRef = useRef<Particle[]>([]);
   const rafRef = useRef<number>(0);
   const prefersReducedMotion = useRef(false);
+  const themeRef = useRef(theme);
+
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   const init = useCallback(() => {
     const canvas = canvasRef.current;
@@ -123,19 +132,9 @@ export default function Background() {
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
 
-      // Clear with light slate background
-      ctx.fillStyle = '#f8fafc';
+      // Solid background fill matching theme
+      ctx.fillStyle = themeRef.current === 'dark' ? '#060608' : '#f8fafc';
       ctx.fillRect(0, 0, w, h);
-
-      // Mouse-following warm glow (desktop only)
-      if (w >= 768 && mx > 0 && my > 0) {
-        const grad = ctx.createRadialGradient(mx, my, 0, mx, my, 350);
-        grad.addColorStop(0, 'rgba(255, 107, 44, 0.04)');
-        grad.addColorStop(0.5, 'rgba(255, 170, 0, 0.015)');
-        grad.addColorStop(1, 'transparent');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-      }
 
       // Update particles
       if (!prefersReducedMotion.current) {
@@ -175,7 +174,7 @@ export default function Background() {
         }
       }
 
-      // Draw connections
+      // Draw connections with solid stroke
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const p1 = particles[i];
@@ -186,36 +185,25 @@ export default function Background() {
 
           if (distSq < CONNECTION_DIST * CONNECTION_DIST) {
             const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / CONNECTION_DIST) * 0.12;
-
-            // Gradient connection line between the two node colors
-            const grad = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-            grad.addColorStop(
-              0,
-              `hsla(${p1.hue}, ${p1.saturation}%, ${p1.lightness}%, ${alpha})`,
-            );
-            grad.addColorStop(
-              1,
-              `hsla(${p2.hue}, ${p2.saturation}%, ${p2.lightness}%, ${alpha})`,
-            );
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
 
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = grad;
+            ctx.strokeStyle = `hsla(${p1.hue}, ${p1.saturation}%, ${p1.lightness}%, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
       }
 
-      // Draw nodes with glow
+      // Draw clean solid nodes (no glows)
       for (const p of particles) {
         const pulse = 1 + Math.sin(p.pulsePhase) * 0.3;
         const currentAlpha = p.baseAlpha * pulse;
         const currentRadius = p.radius * (0.9 + Math.sin(p.pulsePhase * 0.7) * 0.15);
 
-        // Mouse proximity boost
+        // Proximity boost
         let proximityBoost = 0;
         if (mx > 0 && my > 0) {
           const dx = p.x - mx;
@@ -226,26 +214,10 @@ export default function Background() {
           }
         }
 
-        // Outer glow
-        const glowRadius = currentRadius * (3 + proximityBoost * 4);
-        const glowGrad = ctx.createRadialGradient(
-          p.x, p.y, 0,
-          p.x, p.y, glowRadius,
-        );
-        glowGrad.addColorStop(
-          0,
-          `hsla(${p.hue}, ${p.saturation}%, ${p.lightness}%, ${(currentAlpha + proximityBoost) * 0.3})`,
-        );
-        glowGrad.addColorStop(1, 'transparent');
-        ctx.fillStyle = glowGrad;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, glowRadius, 0, Math.PI * 2);
-        ctx.fill();
-
         // Core node
         ctx.beginPath();
         ctx.arc(p.x, p.y, currentRadius, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${p.hue}, ${p.saturation}%, ${p.lightness + 10}%, ${currentAlpha + proximityBoost})`;
+        ctx.fillStyle = `hsla(${p.hue}, ${p.saturation}%, ${p.lightness}%, ${currentAlpha + proximityBoost})`;
         ctx.fill();
       }
 

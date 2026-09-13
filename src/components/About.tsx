@@ -64,8 +64,8 @@ export default function About() {
             justifyContent: 'center',
             textAlign: 'center',
             position: 'relative',
-            border: '1px solid rgba(255, 107, 44, 0.3)',
-            background: 'linear-gradient(135deg, rgba(255, 107, 44, 0.08), rgba(10, 10, 15, 0.95))',
+            border: '1px solid var(--glass-l2-border)',
+            background: 'var(--glass-l2-bg)',
           }}
         >
           {/* Avatar Icon Box */}
@@ -74,12 +74,12 @@ export default function About() {
               width: '3.75rem',
               height: '3.75rem',
               borderRadius: 0,
-              background: 'linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary))',
+              background: 'var(--color-accent-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#ffffff',
-              boxShadow: '0 0 20px rgba(255, 107, 44, 0.4)',
+              boxShadow: 'none',
               marginBottom: '0.75rem',
             }}
           >
