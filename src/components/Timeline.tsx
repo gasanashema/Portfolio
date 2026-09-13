@@ -81,9 +81,6 @@ export default function Timeline() {
 
       {/* 05 — Timeline Progression */}
       <div style={{ marginBottom: '4rem' }}>
-        <h3 className="font-mono" style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--color-accent-primary)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-          // THE ENGINEERING TIMELINE
-        </h3>
         <div
           className="timeline-grid"
           style={{
