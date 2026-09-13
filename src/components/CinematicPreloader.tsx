@@ -108,7 +108,7 @@ export default function CinematicPreloader({
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              padding: 'clamp(1.5rem, 4vw, 3.5rem)',
+              padding: 'clamp(1rem, 3vw, 2.5rem)',
               boxSizing: 'border-box',
               borderBottom: '2px dashed var(--color-accent-primary)',
             }}
@@ -158,6 +158,91 @@ export default function CinematicPreloader({
                 1.9441° S, 30.0619° E · KIGALI
               </span>
             </div>
+
+            {/* TOP INTERACTIVE THEME SELECTION BANNER (PROMINENT AT TOP) */}
+            {!isUnzipping && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                style={{
+                  alignSelf: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  padding: '0.75rem 1.5rem',
+                  border: '1px solid rgba(255, 107, 44, 0.3)',
+                  boxShadow: '0 0 20px rgba(255, 107, 44, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  marginTop: '0.25rem',
+                  marginBottom: '0.25rem',
+                }}
+              >
+                <span
+                  className="font-mono"
+                  style={{
+                    fontSize: '0.65rem',
+                    fontWeight: 800,
+                    letterSpacing: '0.2em',
+                    color: 'var(--color-accent-primary)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  SELECT ENVIRONMENT MODE
+                </span>
+
+                <div style={{ display: 'flex', gap: '0.65rem', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={() => handleModeSelect('dark')}
+                    className="btn-primary"
+                    style={{
+                      padding: '0.5rem 1.15rem',
+                      fontSize: '0.7rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      borderRadius: 0,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <Moon size={14} />
+                    <span>DARK MODE</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => handleModeSelect('light')}
+                    className="btn-glass"
+                    style={{
+                      padding: '0.5rem 1.15rem',
+                      fontSize: '0.7rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem',
+                      borderRadius: 0,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <Sun size={14} />
+                    <span>WHITE MODE</span>
+                  </button>
+                </div>
+
+                <span
+                  className="font-mono"
+                  style={{
+                    fontSize: '0.58rem',
+                    letterSpacing: '0.15em',
+                    color: 'var(--color-text-muted)',
+                  }}
+                >
+                  AUTO-OPENING IN DARK MODE IN {countdown}s...
+                </span>
+              </motion.div>
+            )}
 
             {/* Top Half of Main Title */}
             <div
@@ -210,7 +295,7 @@ export default function CinematicPreloader({
               borderTop: '2px dashed var(--color-accent-primary)',
             }}
           >
-            {/* Bottom Subtitles & Interactive Theme Prompt */}
+            {/* Bottom Subtitles */}
             <div
               style={{
                 textAlign: 'center',
@@ -245,93 +330,10 @@ export default function CinematicPreloader({
                   letterSpacing: '0.25em',
                   color: 'var(--color-text-tertiary)',
                   textTransform: 'uppercase',
-                  marginBottom: '1.25rem',
                 }}
               >
                 SOFTWARE · SYSTEMS · DEVOPS
               </div>
-
-              {/* THEME SELECTION BUTTONS */}
-              {!isUnzipping && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    padding: '1rem 1.75rem',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    backdropFilter: 'blur(8px)',
-                  }}
-                >
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: '0.625rem',
-                      fontWeight: 800,
-                      letterSpacing: '0.2em',
-                      color: 'var(--color-text-primary)',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    SELECT ENVIRONMENT MODE
-                  </span>
-
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <button
-                      type="button"
-                      onClick={() => handleModeSelect('dark')}
-                      className="btn-primary"
-                      style={{
-                        padding: '0.6rem 1.25rem',
-                        fontSize: '0.7rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        borderRadius: 0,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <Moon size={14} />
-                      <span>DARK MODE</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => handleModeSelect('light')}
-                      className="btn-glass"
-                      style={{
-                        padding: '0.6rem 1.25rem',
-                        fontSize: '0.7rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        borderRadius: 0,
-                        cursor: 'pointer',
-                      }}
-                    >
-                      <Sun size={14} />
-                      <span>WHITE MODE</span>
-                    </button>
-                  </div>
-
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: '0.58rem',
-                      letterSpacing: '0.15em',
-                      color: 'var(--color-text-muted)',
-                      marginTop: '0.2rem',
-                    }}
-                  >
-                    AUTO-OPENING IN DARK MODE IN {countdown}s...
-                  </span>
-                </motion.div>
-              )}
             </div>
 
             {/* Bottom Footer Progress Counter */}
